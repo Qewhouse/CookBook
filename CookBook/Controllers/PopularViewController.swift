@@ -8,7 +8,7 @@
 import UIKit
 
 class PopularViewController: UIViewController {
-    
+    // Collection view / Compositional Layout
     override func viewDidLoad() {
         super.viewDidLoad()
         

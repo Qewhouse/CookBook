@@ -18,6 +18,7 @@
 		372C270429AB857F009AFF7B /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */; };
 		372C270629AB863B009AFF7B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270529AB863B009AFF7B /* APIKey.swift */; };
 		372C270829AB8661009AFF7B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270729AB8661009AFF7B /* Theme.swift */; };
+		3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		372C270529AB863B009AFF7B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		372C270729AB8661009AFF7B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				372C26ED29AB4FDE009AFF7B /* MainViewController.swift */,
+				3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */,
 				372C26FD29AB8436009AFF7B /* PopularViewController.swift */,
 				372C26FF29AB850A009AFF7B /* FavoriteViewController.swift */,
 				372C270129AB8533009AFF7B /* SearchViewController.swift */,
@@ -191,6 +194,7 @@
 				372C26EE29AB4FDE009AFF7B /* MainViewController.swift in Sources */,
 				372C26EA29AB4FDE009AFF7B /* AppDelegate.swift in Sources */,
 				372C26EC29AB4FDE009AFF7B /* SceneDelegate.swift in Sources */,
+				3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */,
 				372C270029AB850A009AFF7B /* FavoriteViewController.swift in Sources */,
 				372C270429AB857F009AFF7B /* UIViewController+Utilities.swift in Sources */,
 			);

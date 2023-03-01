@@ -99,7 +99,7 @@ extension FavoriteViewController {
         label.textColor = .orange
         label.font = UIFont(name: "AvenirNextCondensed-Bold", size: 50)
         navigationItem.titleView = label
-        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.backgroundColor = .none
     }
 }
 //MARK: -  constaints

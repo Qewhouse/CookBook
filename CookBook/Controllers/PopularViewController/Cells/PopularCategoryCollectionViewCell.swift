@@ -94,7 +94,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            view.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),

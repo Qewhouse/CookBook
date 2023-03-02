@@ -19,6 +19,23 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     private let trendingLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.minimumScaleFactor = 0.5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let creatorImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let creatorLabel: UILabel = {
+       let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.systemFont(ofSize: 12)
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,30 +54,41 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     func setupView() {
         backgroundColor = Theme.whiteColor
-        layer.cornerRadius = 10
         
         addSubview(trendingImageView)
         addSubview(trendingLabel)
+        addSubview(creatorImageView)
+        addSubview(creatorLabel)
     }
     
-    func configureCell(imageName: String, categoryName: String) {
-        trendingImageView.image = UIImage(named: imageName)
-        trendingLabel.text = categoryName
+    func configureCell(recipeImageName: String, recipeName: String, creatorImageName: String, creatorName: String) {
+        trendingImageView.image = UIImage(named: recipeImageName)
+        trendingLabel.text = recipeName
+        creatorImageView.image = UIImage(named: creatorImageName)
+        creatorLabel.text = "By \(creatorName)"
     }
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            trendingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            trendingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             trendingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             trendingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-//            trendingImageView.heightAnchor.constraint(equalToConstant: 300),
-            trendingImageView.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -5),
+            trendingImageView.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -10),
             
             trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            trendingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            trendingLabel.heightAnchor.constraint(equalToConstant: 15)
+            trendingLabel.heightAnchor.constraint(equalToConstant: 15),
+            trendingLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
+            
+            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            creatorImageView.heightAnchor.constraint(equalToConstant: 40),
+            creatorImageView.widthAnchor.constraint(equalToConstant: 40),
+            
+            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
+            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
         
     }

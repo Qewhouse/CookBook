@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum Secrets {
-    static let apiKey = ""
+enum Secrets: String {
+    case apiKey = ""
 }

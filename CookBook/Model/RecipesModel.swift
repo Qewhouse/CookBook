@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Results: Codable, Equatable {
-    let results: [Result]
-    let offset: Int
-    let number: Int
-    let totalResults: Int
-}
-
-
-struct Result: Codable, Equatable{
-    let id: Int
-    let title: String
-    let image: String?
-    let imageType: String?
-}
+//struct Results: Codable, Equatable {
+//    let results: [Result]
+//    let offset: Int
+//    let number: Int
+//    let totalResults: Int
+//}
+//
+//
+//struct Result: Codable, Equatable{
+//    let id: Int
+//    let title: String
+//    let image: String?
+//    let imageType: String?
+//}
 
 
 struct RecipeModel: Codable {

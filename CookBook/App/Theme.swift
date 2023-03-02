@@ -11,6 +11,7 @@ enum Theme {
     // MARK: - Colors
     static let appColor: UIColor = UIColor(named: "AppColor")!
     static let blackColor: UIColor = .black
+    static let whiteColor: UIColor = .white
     
     // MARK: - Style
     static let buttonCornerRadius: CGFloat = 15

@@ -10,4 +10,7 @@ import Foundation
 struct ListItem {
     let title: String
     let image: String
+    let creatorName: String
+    let photoCreator: String
+    let category: String
 }

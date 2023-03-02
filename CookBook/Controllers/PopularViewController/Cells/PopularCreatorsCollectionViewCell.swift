@@ -9,16 +9,17 @@ import UIKit
 
 class PopularCreatorsCollectionViewCell: UICollectionViewCell {
     
-    private let trendingImageView: UIImageView = {
+    private let popularCreatorsImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let trendingLabel: UILabel = {
+    private let popularCreatorsLabel: UILabel = {
        let label = UILabel()
         label.text = "Some text"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -39,29 +40,28 @@ class PopularCreatorsCollectionViewCell: UICollectionViewCell {
     
     func setupView() {
         backgroundColor = Theme.whiteColor
-        layer.cornerRadius = 10
 
-        addSubview(trendingImageView)
-        addSubview(trendingLabel)
+        addSubview(popularCreatorsImageView)
+        addSubview(popularCreatorsLabel)
     }
     
-    func configureCell(imageName: String, categoryName: String) {
-        trendingImageView.image = UIImage(named: imageName)
-        trendingLabel.text = categoryName
+    func configureCell(creatorImageName: String, creatorName: String) {
+        popularCreatorsImageView.image = UIImage(named: creatorImageName)
+        popularCreatorsLabel.text = creatorName
     }
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            trendingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            trendingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            trendingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            trendingImageView.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -10),
+            popularCreatorsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            popularCreatorsImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            popularCreatorsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            popularCreatorsImageView.bottomAnchor.constraint(equalTo: popularCreatorsLabel.topAnchor, constant: -10),
             
-            trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            trendingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            trendingLabel.heightAnchor.constraint(equalToConstant: 15)
+            popularCreatorsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            popularCreatorsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            popularCreatorsLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            popularCreatorsLabel.heightAnchor.constraint(equalToConstant: 15)
         ])
         
     }

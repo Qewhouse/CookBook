@@ -12,36 +12,47 @@ struct MockData {
     static let shared = MockData()
     
     private let trendingNow: ListSection = {
-        .trendingNow([.init(title: "image1", image: "image1"),
-                      .init(title: "image2", image: "image2"),
-                      .init(title: "image3", image: "image3"),
-                      .init(title: "image4", image: "image4")])
+        .trendingNow([.init(title: "image1", image: "image1", creatorName: "Pam Param", photoCreator: "Avatar1", category: ""),
+                      .init(title: "image2", image: "image2", creatorName: "Pam Param", photoCreator: "Avatar2", category: ""),
+                      .init(title: "image3", image: "image3", creatorName: "Pam Param", photoCreator: "Avatar3", category: ""),
+                      .init(title: "image4", image: "image4", creatorName: "Pam Param", photoCreator: "Avatar1", category: "")])
+    }()
+    
+    private let popularCategoryButton: ListSection = {
+        .popularCategoryButton([.init(title: "", image: "", creatorName: "", photoCreator: "", category: "Salad"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Breakfast"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Appetizer"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Noodle"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Breakfast"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Appetizer"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Noodle"),
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Salad"),])
     }()
     
     private let popularCategory: ListSection = {
-        .popularCategory([.init(title: "image9", image: "image1"),
-                          .init(title: "image10", image: "image2"),
-                          .init(title: "image11", image: "image3"),
-                          .init(title: "image12", image: "image4")])
+        .popularCategory([.init(title: "image9", image: "image1", creatorName: "", photoCreator: "", category: ""),
+                          .init(title: "image10", image: "image2", creatorName: "", photoCreator: "", category: ""),
+                          .init(title: "image11", image: "image3", creatorName: "", photoCreator: "", category: ""),
+                          .init(title: "image12", image: "image4", creatorName: "", photoCreator: "", category: "")])
         
     }()
     
     private let recentRecipe: ListSection = {
-        .recentRecipe([.init(title: "image9", image: "image1"),
-                       .init(title: "image10", image: "image2"),
-                       .init(title: "image11", image: "image3"),
-                       .init(title: "image12", image: "image4")])
+        .recentRecipe([.init(title: "image9", image: "image1", creatorName: "Pam Param", photoCreator: "", category: ""),
+                       .init(title: "image10", image: "image2", creatorName: "Pam Param", photoCreator: "", category: ""),
+                       .init(title: "image11", image: "image3", creatorName: "Pam Param", photoCreator: "", category: ""),
+                       .init(title: "image12", image: "image4", creatorName: "Pam Param", photoCreator: "", category: "")])
        
     }()
     
     private let popularCreators: ListSection = {
-        .popularCreators([.init(title: "image13", image: "Avatar1"),
-                          .init(title: "image14", image: "Avatar2"),
-                          .init(title: "image15", image: "Avatar3"),
-                          .init(title: "image16", image: "Avatar1")])
+        .popularCreators([.init(title: "", image: "", creatorName: "Pam Param", photoCreator: "Avatar1", category: ""),
+                          .init(title: "", image: "", creatorName: "Pam Param", photoCreator: "Avatar2", category: ""),
+                          .init(title: "", image: "", creatorName: "Pam Param", photoCreator: "Avatar3", category: ""),
+                          .init(title: "", image: "", creatorName: "Pam Param", photoCreator: "Avatar1", category: "")])
     }()
     
     var pageData: [ListSection] {
-        [trendingNow, popularCategory, recentRecipe, popularCreators]
+        [trendingNow, popularCategoryButton, popularCategory, recentRecipe, popularCreators]
     }
 }

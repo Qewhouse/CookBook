@@ -13,7 +13,7 @@ class PopularViewController: UIViewController {
        let label = UILabel()
         label.text = "Get amazing recipes for cooking"
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,6 +44,7 @@ class PopularViewController: UIViewController {
         view.addSubview(topScreenLabel)
         view.addSubview(collectionView)
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCollectionViewCell")
+        collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")
         collectionView.register(PopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryCollectionViewCell")
         collectionView.register(RecentRecipeCollectionViewCell.self, forCellWithReuseIdentifier: "RecentRecipeCollectionViewCell")
         collectionView.register(PopularCreatorsCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCreatorsCollectionViewCell")
@@ -76,6 +77,8 @@ extension PopularViewController {
                 return self.createRecentRecipeSection()
             case .popularCreators(_):
                 return self.createPopularCreatorSection()
+            case .popularCategoryButton(_):
+                return self.createPopularCategoryButtonSection()
             }
         }
     }
@@ -98,12 +101,29 @@ extension PopularViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9),
-                                                                         heightDimension: .fractionalHeight(0.4)),
+                                                                         heightDimension: .fractionalHeight(0.5)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .groupPaging,
-                                          interGroupSpacing: 10,
+                                          interGroupSpacing: 20,
+                                          supplementaryItems: [supplementaryHeaderItem()],
+                                          contentInsets: false)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
+        return section
+    }
+    
+    private func createPopularCategoryButtonSection() -> NSCollectionLayoutSection {
+        
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                            heightDimension: .fractionalHeight(1)))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.2),
+                                                                         heightDimension: .fractionalHeight(0.1)),
+                                                       subitems: [item])
+        
+        let section = createLayoutSection(group: group,
+                                          behavior: .groupPaging,
+                                          interGroupSpacing: 30,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
@@ -112,15 +132,15 @@ extension PopularViewController {
     
     private func createPopularCategorySection() -> NSCollectionLayoutSection {
         
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9),
-                                                                         heightDimension: .fractionalHeight(0.4)),
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
+                                                                         heightDimension: .fractionalHeight(0.3)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .groupPaging,
-                                          interGroupSpacing: 10,
+                                          interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
@@ -132,12 +152,12 @@ extension PopularViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
-                                                                         heightDimension: .fractionalHeight(0.3)),
+                                                                         heightDimension: .fractionalHeight(0.4)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .groupPaging,
-                                          interGroupSpacing: 10,
+                                          interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
@@ -146,15 +166,15 @@ extension PopularViewController {
     
     private func createPopularCreatorSection() -> NSCollectionLayoutSection {
         
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
                                                                          heightDimension: .fractionalHeight(0.3)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPagingCentered,
-                                          interGroupSpacing: 10,
+                                          behavior: .groupPaging,
+                                          interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
@@ -167,6 +187,7 @@ extension PopularViewController {
               elementKind: UICollectionView.elementKindSectionHeader,
               alignment: .top)
     }
+    
     
 }
 
@@ -192,19 +213,30 @@ extension PopularViewController: UICollectionViewDataSource {
             
         case .trendingNow(let now):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCollectionViewCell", for: indexPath) as? TrendingCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(imageName: now[indexPath.row].image, categoryName:  now[indexPath.row].title)
+            cell.configureCell(recipeImageName: now[indexPath.row].image,
+                               recipeName: now[indexPath.row].title,
+                               creatorImageName: now[indexPath.row].photoCreator,
+                               creatorName: now[indexPath.row].creatorName)
+            return cell
+        case .popularCategoryButton(let button):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
+            cell.configureCell(buttonName: button[indexPath.row].category)
             return cell
         case .popularCategory(let category):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(imageName: category[indexPath.row].image, categoryName:  category[indexPath.row].title)
+            cell.configureCell(imageName: category[indexPath.row].image,
+                               categoryName:  category[indexPath.row].title)
             return cell
         case .recentRecipe(let recipe):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(imageName: recipe[indexPath.row].image, categoryName:  recipe[indexPath.row].title)
+            cell.configureCell(recipeImageName: recipe[indexPath.row].image,
+                               recipeName: recipe[indexPath.row].title,
+                               creatorName: recipe[indexPath.row].creatorName)
             return cell
         case .popularCreators(let creators):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCreatorsCollectionViewCell", for: indexPath) as? PopularCreatorsCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(imageName: creators[indexPath.row].image, categoryName:  creators[indexPath.row].title)
+            cell.configureCell(creatorImageName: creators[indexPath.row].photoCreator,
+                               creatorName:  creators[indexPath.row].creatorName)
             return cell
         }
     }

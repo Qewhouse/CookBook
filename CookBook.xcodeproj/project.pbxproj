@@ -34,6 +34,7 @@
 		5725092C29AFD293003A5933 /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092929AFD293003A5933 /* Avatar1.png */; };
 		5725092D29AFD293003A5933 /* Avatar2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092A29AFD293003A5933 /* Avatar2.png */; };
 		5725092E29AFD293003A5933 /* Avatar3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092B29AFD293003A5933 /* Avatar3.png */; };
+		5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		5725092929AFD293003A5933 /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
 		5725092A29AFD293003A5933 /* Avatar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar2.png; sourceTree = "<group>"; };
 		5725092B29AFD293003A5933 /* Avatar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar3.png; sourceTree = "<group>"; };
+		5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				5725091F29AE8D7F003A5933 /* TrendingCollectionViewCell.swift */,
+				5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */,
 				5725092129AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift */,
 				5725092329AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift */,
 				5725092529AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift */,
@@ -271,6 +274,7 @@
 				5725092829AFA4AB003A5933 /* HeaderSupplementaryView.swift in Sources */,
 				5725091029AE80D5003A5933 /* ListItem.swift in Sources */,
 				5725091329AE8130003A5933 /* ListSection.swift in Sources */,
+				5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */,
 				372C26EE29AB4FDE009AFF7B /* MainViewController.swift in Sources */,
 				5725092629AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift in Sources */,
 				5725092029AE8D7F003A5933 /* TrendingCollectionViewCell.swift in Sources */,

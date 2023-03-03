@@ -187,8 +187,6 @@ extension PopularViewController {
               elementKind: UICollectionView.elementKindSectionHeader,
               alignment: .top)
     }
-    
-    
 }
 
 //MARK: - UICollectionViewDelegate
@@ -253,7 +251,6 @@ extension PopularViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
-    
 }
 
 //MARK: - Set Constraints

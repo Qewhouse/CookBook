@@ -41,7 +41,6 @@ final class OnboardingViewController: UIViewController {
     @objc func buttonTapped () {
         print("test")
     }
-    
 }
 
 extension OnboardingViewController {
@@ -58,11 +57,9 @@ extension OnboardingViewController {
             button.widthAnchor.constraint(equalToConstant: 150),
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         
-        
         ])
     }
 }
-
 
 import SwiftUI
 struct ListProvider: PreviewProvider {

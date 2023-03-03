@@ -5,7 +5,6 @@
 //  Created by Sergey on 02.03.2023.
 //
 
-import Foundation
 import UIKit
 
 enum NetworkError: LocalizedError {
@@ -114,5 +113,4 @@ class NetworkManager: NetworkManagerProtocol {
         }
         .resume()
     }
-    
 }

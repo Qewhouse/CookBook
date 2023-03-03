@@ -9,13 +9,10 @@ import UIKit
 
 class SearchViewController: UIViewController  {
    
-
-    
     //MARK: - Search + TableView
     weak var delegate : SearchViewController?
     var searchController = UISearchController()
     var tableView = UITableView()
-    
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +37,6 @@ class SearchViewController: UIViewController  {
         searchBar.placeholder = "Search recipes"
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search recipes", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.9764705882, green: 0.8666666667, blue: 0.462745098, alpha: 1) ])
 
-       
         view.addSubview(searchBar)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +64,3 @@ class SearchViewController: UIViewController  {
     }
     
 }
-
-
-

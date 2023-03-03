@@ -44,6 +44,4 @@ enum ListSection {
             return "Popular Creators"
         }
     }
-    
-    
 }

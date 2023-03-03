@@ -21,7 +21,7 @@ class FavoriteViewController: UIViewController {
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
     
     //ImageArray
-    var imageArray = "screen" //переделается в массив UIImage
+    var imageArray = "AppIcon" //переделается в массив UIImage
     
     
     override func viewDidLoad() {

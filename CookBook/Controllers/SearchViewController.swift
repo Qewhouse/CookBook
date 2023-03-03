@@ -10,6 +10,7 @@ import UIKit
 class SearchViewController: UIViewController  {
 
     //MARK: - Search + TableView
+    
     weak var delegate : SearchViewController?
     var searchController = UISearchController()
     var tableView = UITableView()
@@ -61,5 +62,31 @@ class SearchViewController: UIViewController  {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 
         ])
+    }
+}
+
+import SwiftUI
+struct ListProvider1: PreviewProvider {
+    static var previews: some View {
+        ContainterView().edgesIgnoringSafeArea(.all)
+            .previewDevice("iPhone 12 Pro Max")
+            .previewDisplayName("iPhone 12 Pro Max")
+        
+        ContainterView().edgesIgnoringSafeArea(.all)
+            .previewDevice("iPhone SE (3rd generation)")
+            .previewDisplayName("iPhone SE (3rd generation)")
+    }
+    
+    struct ContainterView: UIViewControllerRepresentable {
+        let listVC = SearchViewController()
+        func makeUIViewController(context:
+                                  UIViewControllerRepresentableContext<ListProvider1.ContainterView>) -> SearchViewController {
+            return listVC
+        }
+        
+        func updateUIViewController(_ uiViewController:
+                                    ListProvider1.ContainterView.UIViewControllerType, context:
+                                    UIViewControllerRepresentableContext<ListProvider1.ContainterView>) {
+        }
     }
 }

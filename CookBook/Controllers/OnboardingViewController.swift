@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol OnboardingViewControllerDelegate: AnyObject {
+    func didFinishOnboarding()
+}
+
 final class OnboardingViewController: UIViewController {
+    
+    weak var delegate: OnboardingViewControllerDelegate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -66,9 +72,8 @@ final class OnboardingViewController: UIViewController {
     
     //MARK: - Methods
     //go to the next controller by pressing the button
-    @objc func buttonTapped () {
-        let vc = MainViewController()
-        self.present(vc, animated: true, completion: nil)
+    @objc func buttonTapped (_ sender: UIButton) {
+        delegate?.didFinishOnboarding()
     }
  
     //setting items on the root view

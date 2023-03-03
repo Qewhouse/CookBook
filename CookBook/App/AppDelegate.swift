@@ -18,7 +18,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = Theme.appColor
         window?.rootViewController = OnboardingViewController()
         return true
-    }
-    
+    } 
 }
-

@@ -11,7 +11,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
     private let view: UIView = {
       let view = UIView()
-        view.backgroundColor = .gray
+        view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
         view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -23,16 +23,17 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let trendingImageView: UIImageView = {
+    private let popularCategoryImageView: UIImageView = {
        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let trendingLabel: UILabel = {
+    private let popularCategoryLabel: UILabel = {
        let label = UILabel()
         label.text = "Some text"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,54 +53,40 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
     func setupView() {
         backgroundColor = Theme.whiteColor
-        layer.cornerRadius = 10
-
+        translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
-        view.addSubview(trendingLabel)
+        view.addSubview(popularCategoryLabel)
         addSubview(backImageView)
-        backImageView.addSubview(trendingImageView)
-        backImageView.layer.cornerRadius = bounds.size.width / 2
+        backImageView.addSubview(popularCategoryImageView)
     }
     
     func configureCell(imageName: String, categoryName: String) {
-        trendingImageView.image = UIImage(named: imageName)
-        trendingLabel.text = categoryName
+        popularCategoryImageView.image = UIImage(named: imageName)
+        popularCategoryLabel.text = categoryName
     }
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            view.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            
-            trendingLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            trendingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            trendingLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            trendingLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             
             backImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            backImageView.widthAnchor.constraint(equalToConstant: 70),
-            backImageView.heightAnchor.constraint(equalToConstant: 70),
+            backImageView.widthAnchor.constraint(equalToConstant: 60),
+            backImageView.heightAnchor.constraint(equalToConstant: 60),
             
-            trendingImageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 0),
-            trendingImageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor, constant: 0),
-            trendingImageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: 0),
-            trendingImageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 0)
+            popularCategoryImageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 0),
+            popularCategoryImageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor, constant: 0),
+            popularCategoryImageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: 0),
+            popularCategoryImageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 0),
             
-            
-            
-//            trendingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-//            trendingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-//            trendingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-//            trendingImageView.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -10),
-//
-//            trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-//            trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-//            trendingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-//            trendingLabel.heightAnchor.constraint(equalToConstant: 15)
+            popularCategoryLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            popularCategoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            popularCategoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            popularCategoryLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
         
     }

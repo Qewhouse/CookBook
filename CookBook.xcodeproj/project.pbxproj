@@ -19,6 +19,11 @@
 		372C270629AB863B009AFF7B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270529AB863B009AFF7B /* APIKey.swift */; };
 		372C270829AB8661009AFF7B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270729AB8661009AFF7B /* Theme.swift */; };
 		3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */; };
+		37F2FF6029B1C4CC00198B15 /* RecipesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */; };
+		37F2FF6129B1C4CC00198B15 /* URLSeachPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */; };
+		37F2FF6229B1C4CC00198B15 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2FF5E29B1C4CC00198B15 /* ImageType.swift */; };
+		37F2FF6329B1C4CC00198B15 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */; };
+		37F2FF6429B1C4CC00198B15 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2FF5D29B1C4CC00198B15 /* URLManager.swift */; };
 		5725091029AE80D5003A5933 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725090F29AE80D5003A5933 /* ListItem.swift */; };
 		5725091329AE8130003A5933 /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725091229AE8130003A5933 /* ListSection.swift */; };
 		5725091529AE83A5003A5933 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725091429AE83A4003A5933 /* MockData.swift */; };
@@ -34,6 +39,7 @@
 		5725092C29AFD293003A5933 /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092929AFD293003A5933 /* Avatar1.png */; };
 		5725092D29AFD293003A5933 /* Avatar2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092A29AFD293003A5933 /* Avatar2.png */; };
 		5725092E29AFD293003A5933 /* Avatar3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092B29AFD293003A5933 /* Avatar3.png */; };
+		5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +57,11 @@
 		372C270529AB863B009AFF7B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		372C270729AB8661009AFF7B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSeachPath.swift; sourceTree = "<group>"; };
+		37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		37F2FF5D29B1C4CC00198B15 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
+		37F2FF5E29B1C4CC00198B15 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
+		37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesModel.swift; sourceTree = "<group>"; };
 		5725090F29AE80D5003A5933 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		5725091229AE8130003A5933 /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
 		5725091429AE83A4003A5933 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -66,6 +77,7 @@
 		5725092929AFD293003A5933 /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
 		5725092A29AFD293003A5933 /* Avatar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar2.png; sourceTree = "<group>"; };
 		5725092B29AFD293003A5933 /* Avatar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar3.png; sourceTree = "<group>"; };
+		5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 				372C270A29AB8A69009AFF7B /* App */,
 				372C270C29AB8B2C009AFF7B /* Controllers */,
 				372C270B29AB8A86009AFF7B /* Extensions */,
+				37F2FF6529B1C4E600198B15 /* Model */,
 				372C270929AB8A00009AFF7B /* Resources */,
 				372C26F429AB4FDF009AFF7B /* LaunchScreen.storyboard */,
 			);
@@ -148,6 +161,18 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		37F2FF6529B1C4E600198B15 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				37F2FF5E29B1C4CC00198B15 /* ImageType.swift */,
+				37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */,
+				37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */,
+				37F2FF5D29B1C4CC00198B15 /* URLManager.swift */,
+				37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5725090D29AE8094003A5933 /* PopularViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				5725091F29AE8D7F003A5933 /* TrendingCollectionViewCell.swift */,
+				5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */,
 				5725092129AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift */,
 				5725092329AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift */,
 				5725092529AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift */,
@@ -263,22 +289,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F2FF6329B1C4CC00198B15 /* NetworkManager.swift in Sources */,
 				372C270829AB8661009AFF7B /* Theme.swift in Sources */,
 				372C270229AB8533009AFF7B /* SearchViewController.swift in Sources */,
+				37F2FF6129B1C4CC00198B15 /* URLSeachPath.swift in Sources */,
 				372C26FE29AB8436009AFF7B /* PopularViewController.swift in Sources */,
 				5725091529AE83A5003A5933 /* MockData.swift in Sources */,
+				37F2FF6229B1C4CC00198B15 /* ImageType.swift in Sources */,
 				372C270629AB863B009AFF7B /* APIKey.swift in Sources */,
 				5725092829AFA4AB003A5933 /* HeaderSupplementaryView.swift in Sources */,
 				5725091029AE80D5003A5933 /* ListItem.swift in Sources */,
 				5725091329AE8130003A5933 /* ListSection.swift in Sources */,
+				5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */,
 				372C26EE29AB4FDE009AFF7B /* MainViewController.swift in Sources */,
 				5725092629AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift in Sources */,
 				5725092029AE8D7F003A5933 /* TrendingCollectionViewCell.swift in Sources */,
 				372C26EA29AB4FDE009AFF7B /* AppDelegate.swift in Sources */,
 				372C26EC29AB4FDE009AFF7B /* SceneDelegate.swift in Sources */,
+				37F2FF6429B1C4CC00198B15 /* URLManager.swift in Sources */,
 				5725092229AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift in Sources */,
 				3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */,
 				372C270029AB850A009AFF7B /* FavoriteViewController.swift in Sources */,
+				37F2FF6029B1C4CC00198B15 /* RecipesModel.swift in Sources */,
 				372C270429AB857F009AFF7B /* UIViewController+Utilities.swift in Sources */,
 				5725092429AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift in Sources */,
 			);

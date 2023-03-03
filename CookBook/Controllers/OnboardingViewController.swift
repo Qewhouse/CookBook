@@ -64,14 +64,13 @@ final class OnboardingViewController: UIViewController {
         return label
     }()
     
-    
     //MARK: - Methods
     //go to the next controller by pressing the button
     @objc func buttonTapped () {
         let vc = MainViewController()
         self.present(vc, animated: true, completion: nil)
     }
-    
+ 
     //setting items on the root view
     func setupViews() {
         view.addSubview(backImageView)
@@ -105,6 +104,7 @@ extension OnboardingViewController {
             bestRecipesLabel.heightAnchor.constraint(equalToConstant: 100),
             bestRecipesLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             bestRecipesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
         ])
     }
 }

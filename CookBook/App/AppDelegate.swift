@@ -16,9 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = Theme.appColor
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = OnboardingViewController()
         return true
-    }
-    
+    } 
 }
-

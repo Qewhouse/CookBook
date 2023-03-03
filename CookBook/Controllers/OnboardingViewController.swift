@@ -9,59 +9,109 @@ import UIKit
 
 final class OnboardingViewController: UIViewController {
     
-    let backView: UIImageView = {
+    //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //setting elements and their constraints
+        setupViews()
+        setupConstraints()
+    }
+    
+    //MARK: - Properties
+    //creating view
+    let backImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "screen")
-        image.contentMode = .scaleAspectFill
+        image.image = UIImage(named: "onboardingScreenImage")
+        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    let button: UIButton = {
+    let startButton: UIButton = {
         let button = UIButton()
-        button.setTitle("TEST", for: .normal)
+        button.setTitle("Start Cooking", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.layer.cornerRadius = Theme.buttonCornerRadius
-        button.backgroundColor = .red
+        button.backgroundColor = Theme.yellowColor
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        setupConstraints()
-    }
+    let letsCookingLabel:UILabel =  {
+        let label = UILabel()
+        label.textColor = Theme.whiteColor
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.text = "Let's Cooking"
+        label.font = UIFont.boldSystemFont(ofSize: 70.0)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    func setupViews() {
-        view.addSubview(backView)
-        view.addSubview(button)
-    }
+    let bestRecipesLabel:UILabel =  {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.text = "Find the best recipes"
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
+    //MARK: - Methods
+    //go to the next controller by pressing the button
     @objc func buttonTapped () {
-        print("test")
+        let vc = MainViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+ 
+    //setting items on the root view
+    func setupViews() {
+        view.addSubview(backImageView)
+        view.addSubview(startButton)
+        view.addSubview(letsCookingLabel)
+        view.addSubview(bestRecipesLabel)
     }
 }
 
+//MARK: - Extension: constraints
 extension OnboardingViewController {
+    //adjusting the arrangement of elements on the screen
     func setupConstraints() {
         NSLayoutConstraint.activate([
-        
-            backView.topAnchor.constraint(equalTo: view.topAnchor),
-            backView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            button.widthAnchor.constraint(equalToConstant: 150),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            startButton.heightAnchor.constraint(equalToConstant: 50),
+            startButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            letsCookingLabel.bottomAnchor.constraint(equalTo: bestRecipesLabel.bottomAnchor, constant: -50),
+            letsCookingLabel.heightAnchor.constraint(equalToConstant: 200),
+            letsCookingLabel.widthAnchor.constraint(equalToConstant: 200),
+            letsCookingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            bestRecipesLabel.bottomAnchor.constraint(equalTo: startButton.bottomAnchor, constant: -50),
+            bestRecipesLabel.heightAnchor.constraint(equalToConstant: 100),
+            bestRecipesLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            bestRecipesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
         ])
     }
 }
 
+//MARK: - UIPreview
 import SwiftUI
+//creating a preview screen in the IDE to understand the arrangement of elements
 struct ListProvider: PreviewProvider {
     static var previews: some View {
         ContainterView().edgesIgnoringSafeArea(.all)

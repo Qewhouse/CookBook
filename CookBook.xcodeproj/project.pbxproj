@@ -19,6 +19,7 @@
 		372C270629AB863B009AFF7B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270529AB863B009AFF7B /* APIKey.swift */; };
 		372C270829AB8661009AFF7B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C270729AB8661009AFF7B /* Theme.swift */; };
 		3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */; };
+		37F2AAF729B1BFE50045B5BA /* Model in Resources */ = {isa = PBXBuildFile; fileRef = 37F2AAF629B1BFE50045B5BA /* Model */; };
 		5725091029AE80D5003A5933 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725090F29AE80D5003A5933 /* ListItem.swift */; };
 		5725091329AE8130003A5933 /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725091229AE8130003A5933 /* ListSection.swift */; };
 		5725091529AE83A5003A5933 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725091429AE83A4003A5933 /* MockData.swift */; };
@@ -52,6 +53,7 @@
 		372C270529AB863B009AFF7B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		372C270729AB8661009AFF7B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		37F2AAF629B1BFE50045B5BA /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
 		5725090F29AE80D5003A5933 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		5725091229AE8130003A5933 /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
 		5725091429AE83A4003A5933 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				372C270A29AB8A69009AFF7B /* App */,
 				372C270C29AB8B2C009AFF7B /* Controllers */,
+				37F2AAF629B1BFE50045B5BA /* Model */,
 				372C270B29AB8A86009AFF7B /* Extensions */,
 				372C270929AB8A00009AFF7B /* Resources */,
 				372C26F429AB4FDF009AFF7B /* LaunchScreen.storyboard */,
@@ -247,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F2AAF729B1BFE50045B5BA /* Model in Resources */,
 				5725091B29AE85D8003A5933 /* image4.png in Resources */,
 				5725091D29AE85D8003A5933 /* image3.png in Resources */,
 				5725091E29AE85D8003A5933 /* image2.png in Resources */,

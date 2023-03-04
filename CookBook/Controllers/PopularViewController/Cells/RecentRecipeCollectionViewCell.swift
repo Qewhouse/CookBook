@@ -9,32 +9,37 @@ import UIKit
 
 class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
-    private let backImageView: UIView = {
-      let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    
+    private let recipeImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = Theme.imageCornerRadius
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
-    private let recentRecipeImageView: UIImageView = {
+    private let recipeLabel: UILabel = {
+       let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let creatorImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let recipeNameLabel: UILabel = {
+    private let creatorLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let creatorNameLabel: UILabel = {
-       let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -54,40 +59,40 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     func setupView() {
         backgroundColor = Theme.whiteColor
         
-        addSubview(backImageView)
-        backImageView.addSubview(recentRecipeImageView)
-        addSubview(recipeNameLabel)
-        addSubview(creatorNameLabel)
+        addSubview(recipeImageView)
+        addSubview(recipeLabel)
+        addSubview(creatorImageView)
+        addSubview(creatorLabel)
     }
     
-    func configureCell(recipeImageName: String, recipeName: String, creatorName: String) {
-        recentRecipeImageView.image = UIImage(named: recipeImageName)
-        recipeNameLabel.text = recipeName
-        creatorNameLabel.text = "By \(creatorName)"
+    func configureCell(recipeImageName: String, recipeName: String, creatorImageName: String, creatorName: String) {
+        recipeImageView.image = UIImage(named: recipeImageName)
+        recipeLabel.text = recipeName
+        creatorImageView.image = UIImage(named: creatorImageName)
+        creatorLabel.text = "By \(creatorName)"
     }
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            backImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            backImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            backImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            backImageView.heightAnchor.constraint(equalToConstant: 150),
-            backImageView.bottomAnchor.constraint(equalTo: recipeNameLabel.topAnchor, constant: -5),
+            recipeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            recipeImageView.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: -10),
             
-            recentRecipeImageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 0),
-            recentRecipeImageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor, constant: 0),
-            recentRecipeImageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: 0),
-            recentRecipeImageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 0),
+            recipeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            recipeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            recipeLabel.heightAnchor.constraint(equalToConstant: 15),
+            recipeLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
             
-            recipeNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            recipeNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            recipeNameLabel.bottomAnchor.constraint(equalTo: creatorNameLabel.topAnchor, constant: -5),
+            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            creatorImageView.heightAnchor.constraint(equalToConstant: 25),
+            creatorImageView.widthAnchor.constraint(equalToConstant: 25),
             
-            creatorNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
-            creatorNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            creatorNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            creatorNameLabel.heightAnchor.constraint(equalToConstant: 15)
+            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
+            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
         
     }

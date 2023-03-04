@@ -13,7 +13,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.backgroundColor = .none
         button.layer.cornerRadius = 10
-        button.tintColor = .red
+        button.tintColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
@@ -35,7 +35,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = Theme.whiteColor
+        backgroundColor = .none
 
         addSubview(button)
     }
@@ -46,7 +46,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     
     func isSelected() {
         if button.isSelected {
-            button.backgroundColor = .red
+            button.backgroundColor = Theme.yellowColor
             button.tintColor = .white
         }
     }

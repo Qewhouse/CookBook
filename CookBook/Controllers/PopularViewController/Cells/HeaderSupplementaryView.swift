@@ -21,7 +21,6 @@ class HeaderSupplementaryView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = Theme.whiteColor
         addSubview(headerLabel)
         
         setConstraints()

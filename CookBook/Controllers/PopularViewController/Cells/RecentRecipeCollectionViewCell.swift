@@ -56,9 +56,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
-        backgroundColor = Theme.whiteColor
-        
+    func setupView() {        
         addSubview(recipeImageView)
         addSubview(recipeLabel)
         addSubview(creatorImageView)

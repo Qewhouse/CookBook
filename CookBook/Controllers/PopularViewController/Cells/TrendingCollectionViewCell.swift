@@ -56,8 +56,6 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = Theme.whiteColor
-        
         addSubview(trendingImageView)
         addSubview(trendingLabel)
         addSubview(creatorImageView)

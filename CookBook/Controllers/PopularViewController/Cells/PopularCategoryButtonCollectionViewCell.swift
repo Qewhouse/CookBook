@@ -11,8 +11,8 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .none
-        button.layer.cornerRadius = 10
+//        button.backgroundColor = Theme.yellowColor
+        button.layer.cornerRadius = Theme.buttonCornerRadius
         button.tintColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -35,8 +35,6 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = .none
-
         addSubview(button)
     }
     

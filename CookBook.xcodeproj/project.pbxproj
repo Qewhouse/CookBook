@@ -34,7 +34,6 @@
 		5725092029AE8D7F003A5933 /* TrendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725091F29AE8D7F003A5933 /* TrendingCollectionViewCell.swift */; };
 		5725092229AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092129AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift */; };
 		5725092429AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092329AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift */; };
-		5725092629AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092529AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift */; };
 		5725092829AFA4AB003A5933 /* HeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092729AFA4AB003A5933 /* HeaderSupplementaryView.swift */; };
 		5725092C29AFD293003A5933 /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092929AFD293003A5933 /* Avatar1.png */; };
 		5725092D29AFD293003A5933 /* Avatar2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092A29AFD293003A5933 /* Avatar2.png */; };
@@ -72,7 +71,6 @@
 		5725091F29AE8D7F003A5933 /* TrendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCollectionViewCell.swift; sourceTree = "<group>"; };
 		5725092129AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5725092329AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
-		5725092529AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCreatorsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5725092729AFA4AB003A5933 /* HeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		5725092929AFD293003A5933 /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
 		5725092A29AFD293003A5933 /* Avatar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar2.png; sourceTree = "<group>"; };
@@ -164,9 +162,9 @@
 		37F2FF6529B1C4E600198B15 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				37F2FF5E29B1C4CC00198B15 /* ImageType.swift */,
 				37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */,
 				37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */,
+				37F2FF5E29B1C4CC00198B15 /* ImageType.swift */,
 				37F2FF5D29B1C4CC00198B15 /* URLManager.swift */,
 				37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */,
 			);
@@ -192,7 +190,6 @@
 				5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */,
 				5725092129AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift */,
 				5725092329AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift */,
-				5725092529AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift */,
 				5725092729AFA4AB003A5933 /* HeaderSupplementaryView.swift */,
 			);
 			path = Cells;
@@ -302,7 +299,6 @@
 				5725091329AE8130003A5933 /* ListSection.swift in Sources */,
 				5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */,
 				372C26EE29AB4FDE009AFF7B /* MainViewController.swift in Sources */,
-				5725092629AE8E23003A5933 /* PopularCreatorsCollectionViewCell.swift in Sources */,
 				5725092029AE8D7F003A5933 /* TrendingCollectionViewCell.swift in Sources */,
 				372C26EA29AB4FDE009AFF7B /* AppDelegate.swift in Sources */,
 				372C26EC29AB4FDE009AFF7B /* SceneDelegate.swift in Sources */,
@@ -380,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -434,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -451,7 +447,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2JBA92AKK9;
+				DEVELOPMENT_TEAM = WPASFV42KH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CookBook/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CookBook;
@@ -484,7 +480,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2JBA92AKK9;
+				DEVELOPMENT_TEAM = WPASFV42KH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CookBook/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CookBook;

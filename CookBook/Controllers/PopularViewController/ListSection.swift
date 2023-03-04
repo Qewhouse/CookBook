@@ -13,15 +13,13 @@ enum ListSection {
     case popularCategoryButton([ListItem])
     case popularCategory([ListItem])
     case recentRecipe([ListItem])
-    case popularCreators([ListItem])
     
     var items: [ListItem] {
         switch self {
         case .trendingNow(let items),
                 .popularCategoryButton(let items),
                 .popularCategory(let items),
-                .recentRecipe(let items),
-                .popularCreators(let items):
+                .recentRecipe(let items):
             return items
         }
     }
@@ -40,8 +38,6 @@ enum ListSection {
             return ""
         case .recentRecipe(_):
             return "Recent Recipe"
-        case .popularCreators(_):
-            return "Popular Creators"
         }
     }
 }

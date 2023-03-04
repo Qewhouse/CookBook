@@ -26,7 +26,7 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        crateTable()
+        createTable()
         setupNavigationDar()
         setupConstraints()
         view.addSubview(tableView)
@@ -37,7 +37,7 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     //создание TableView
-    func crateTable() {
+    func createTable() {
         view.addSubview(tableView)
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifireMenu)

@@ -28,7 +28,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = Theme.imageCornerRadius
-//        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -76,7 +75,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = .none
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(view)

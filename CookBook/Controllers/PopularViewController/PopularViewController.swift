@@ -39,7 +39,7 @@ class PopularViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = Theme.whiteColor
+//        view.backgroundColor = Theme.whiteColor
         
         view.addSubview(topScreenLabel)
         view.addSubview(collectionView)

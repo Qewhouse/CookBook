@@ -50,6 +50,7 @@
 		A57D6B3829B2035A00D67DC6 /* NutritionCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3729B2035A00D67DC6 /* NutritionCustomView.swift */; };
 		A57D6B3A29B208F300D67DC6 /* IngredientsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3929B208F300D67DC6 /* IngredientsCollectionView.swift */; };
 		A57D6B3E29B27E3500D67DC6 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */; };
+		A598C63429B5001A00CA071C /* SpinnerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598C63329B5001A00CA071C /* SpinnerSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		A57D6B3729B2035A00D67DC6 /* NutritionCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCustomView.swift; sourceTree = "<group>"; };
 		A57D6B3929B208F300D67DC6 /* IngredientsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCollectionView.swift; sourceTree = "<group>"; };
 		A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
+		A598C63329B5001A00CA071C /* SpinnerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerSetup.swift; sourceTree = "<group>"; };
 		D466C558EDECDA6D2526FE68 /* Pods-CookBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookBook.debug.xcconfig"; path = "Target Support Files/Pods-CookBook/Pods-CookBook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +185,7 @@
 			children = (
 				372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */,
 				A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */,
+				A598C63329B5001A00CA071C /* SpinnerSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				37F2FF6429B1C4CC00198B15 /* URLManager.swift in Sources */,
 				5725092229AE8DB4003A5933 /* PopularCategoryCollectionViewCell.swift in Sources */,
 				A57D6B2C29B1FACE00D67DC6 /* RecipeDetailViewController.swift in Sources */,
+				A598C63429B5001A00CA071C /* SpinnerSetup.swift in Sources */,
 				3795D6DE29AD441F0075AE1B /* OnboardingViewController.swift in Sources */,
 				372C270029AB850A009AFF7B /* FavoriteViewController.swift in Sources */,
 				37F2FF6029B1C4CC00198B15 /* RecipesModel.swift in Sources */,

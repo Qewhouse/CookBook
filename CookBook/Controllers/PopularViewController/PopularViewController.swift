@@ -251,7 +251,9 @@ extension PopularViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
+    
 }
+
 
 //MARK: - Set Constraints
 

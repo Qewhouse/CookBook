@@ -32,6 +32,8 @@ class IngredientsCollectionView: UICollectionView {
 
 class IngredientsCollectionViewCell: UICollectionViewCell {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    
     static let reuseId = "IngredientsCollectionViewCell"
     
     var isImageLoaded: Bool = false
@@ -107,9 +109,14 @@ class IngredientsCollectionViewCell: UICollectionViewCell {
 extension IngredientsCollectionViewCell {
     func configureCell(for ingredientName: String?, with image: UIImage?, isSelected: Bool?) {
         if let image = image {
+            
+            spinner.removeFromSuperview()
             isImageLoaded = true
             imageView.image = image
             
+        } else {
+            addSubview(spinner)
+            spinner.makeSpinner(imageView)
         }
         if isSelected != nil {
             if isSelected == false {

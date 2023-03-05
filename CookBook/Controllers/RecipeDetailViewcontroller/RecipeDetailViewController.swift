@@ -26,6 +26,7 @@ class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     
     private var networkManager = NetworkManager()
     
+    
     init(with recipeData: Recipe, index: IndexPath) {
         self.recipeData = recipeData
         if let ingredients = recipeData.extendedIngredients {
@@ -133,11 +134,13 @@ extension RecipeDetailViewController: UICollectionViewDelegateFlowLayout {
 private extension RecipeDetailViewController {
     
     func loadRecipeImage(with name: String?) {
+        customView.spinner.makeSpinner(customView.backgroundImageView)
         guard let imageName = name else { return }
         networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.huge), size: IngredientsSizes.small) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
+                    self.customView.spinner.removeFromSuperview()
                     self.customView.backgroundImageView.image = UIImage(data: data)
                 case .failure(let error):
                     self.showErrorAlert(error: error)

@@ -16,6 +16,8 @@ protocol DetailViewDelegate: AnyObject {
 
 class RecipeDetailView: CustomView {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    
     init(with nutrition: Nutrition?) {
         if let nutrition = nutrition {
             nutritionCombinedView = NutritionCombinedView(nutrition: nutrition)
@@ -171,6 +173,7 @@ class RecipeDetailView: CustomView {
         addSubview(backgroundImageView)
         addSubview(backButton)
         addSubview(scrollView)
+        addSubview(spinner)
         scrollView.addSubview(contentView)
         
         contentView.addSubview(titleLabel)

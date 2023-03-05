@@ -39,7 +39,7 @@ class PopularViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = Theme.whiteColor
+//        view.backgroundColor = Theme.whiteColor
         
         view.addSubview(topScreenLabel)
         view.addSubview(collectionView)
@@ -47,7 +47,6 @@ class PopularViewController: UIViewController {
         collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")
         collectionView.register(PopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryCollectionViewCell")
         collectionView.register(RecentRecipeCollectionViewCell.self, forCellWithReuseIdentifier: "RecentRecipeCollectionViewCell")
-        collectionView.register(PopularCreatorsCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCreatorsCollectionViewCell")
         collectionView.register(HeaderSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderSupplementaryView")
         collectionView.collectionViewLayout = createLayout()
     }
@@ -75,8 +74,6 @@ extension PopularViewController {
                 return self.createPopularCategorySection()
             case .recentRecipe(_):
                 return self.createRecentRecipeSection()
-            case .popularCreators(_):
-                return self.createPopularCreatorSection()
             case .popularCategoryButton(_):
                 return self.createPopularCategoryButtonSection()
             }
@@ -135,7 +132,7 @@ extension PopularViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
-                                                                         heightDimension: .fractionalHeight(0.3)),
+                                                                         heightDimension: .fractionalHeight(0.35)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
@@ -153,23 +150,6 @@ extension PopularViewController {
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
                                                                          heightDimension: .fractionalHeight(0.4)),
-                                                       subitems: [item])
-        
-        let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
-                                          interGroupSpacing: 20,
-                                          supplementaryItems: [supplementaryHeaderItem()],
-                                          contentInsets: false)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
-        return section
-    }
-    
-    private func createPopularCreatorSection() -> NSCollectionLayoutSection {
-        
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(1)))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
-                                                                         heightDimension: .fractionalHeight(0.3)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
@@ -223,18 +203,13 @@ extension PopularViewController: UICollectionViewDataSource {
         case .popularCategory(let category):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(imageName: category[indexPath.row].image,
-                               categoryName:  category[indexPath.row].title)
+                               categoryName:  category[indexPath.row].title, creatorName: category[indexPath.row].creatorName)
             return cell
         case .recentRecipe(let recipe):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(recipeImageName: recipe[indexPath.row].image,
-                               recipeName: recipe[indexPath.row].title,
+                               recipeName: recipe[indexPath.row].title, creatorImageName: recipe[indexPath.row].photoCreator,
                                creatorName: recipe[indexPath.row].creatorName)
-            return cell
-        case .popularCreators(let creators):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCreatorsCollectionViewCell", for: indexPath) as? PopularCreatorsCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(creatorImageName: creators[indexPath.row].photoCreator,
-                               creatorName:  creators[indexPath.row].creatorName)
             return cell
         }
     }
@@ -263,7 +238,7 @@ extension PopularViewController {
         
         NSLayoutConstraint.activate([
             
-            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             topScreenLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             topScreenLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             

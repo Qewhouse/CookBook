@@ -21,13 +21,13 @@ class FavoriteViewController: UIViewController {
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
     
     //ImageArray
-    var imageArray = "screen" //переделается в массив UIImage
+    var imageArray = "AppIcon" //переделается в массив UIImage
     
     var networkManager = NetworkManager()
     var recipe: RecipeModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        crateTable()
+        createTable()
         setupNavigationDar()
         setupConstraints()
         view.addSubview(tableView)
@@ -38,7 +38,7 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     //создание TableView
-    func crateTable() {
+    func createTable() {
         view.addSubview(tableView)
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifireMenu)

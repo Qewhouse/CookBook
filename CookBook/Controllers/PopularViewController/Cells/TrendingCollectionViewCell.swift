@@ -11,7 +11,9 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     private let trendingImageView: UIImageView = {
        let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = Theme.imageCornerRadius
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -19,8 +21,9 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     private let trendingLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.minimumScaleFactor = 0.5
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,7 +38,7 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     private let creatorLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -53,8 +56,6 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = Theme.whiteColor
-        
         addSubview(trendingImageView)
         addSubview(trendingLabel)
         addSubview(creatorImageView)

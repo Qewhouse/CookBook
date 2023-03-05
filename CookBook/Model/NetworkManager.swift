@@ -7,27 +7,6 @@
 
 import UIKit
 
-enum NetworkError: LocalizedError {
-    case wrongUrl
-    case notFoundData
-    case wrongImageType
-    case wrongCode
-}
-
-extension NetworkError {
-    var localizedDescription: String {
-        switch self {
-        case .wrongUrl:
-            return NSLocalizedString("Invalid URL!", comment: "")
-        case .notFoundData:
-            return NSLocalizedString("No data from network call!", comment: "")
-        case .wrongImageType:
-            return NSLocalizedString("Undefined image type!", comment: "")
-        case .wrongCode:
-            return NSLocalizedString("Error code response", comment: "")
-        }
-    }
-}
 
 protocol NetworkManagerProtocol: AnyObject {
     
@@ -95,7 +74,7 @@ class NetworkManager: NetworkManagerProtocol {
     private func loadDataFromUrl(_ url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         
         let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: 10)
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
             }
@@ -111,6 +90,6 @@ class NetworkManager: NetworkManagerProtocol {
             }
             completion(.success(data))
         }
-        .resume()
+        task.resume()
     }
 }

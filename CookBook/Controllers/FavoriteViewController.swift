@@ -23,7 +23,8 @@ class FavoriteViewController: UIViewController {
     //ImageArray
     var imageArray = "screen" //переделается в массив UIImage
     
-    
+    var networkManager = NetworkManager()
+    var recipe: RecipeModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         crateTable()
@@ -74,6 +75,27 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let numberMenu = indexPath.row
         print(numberMenu)
+        
+        networkManager.fetchRecipes(ApiURL.randomSearch(number: 1, tags: ["burger"])) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .success(let recipe):
+                    self.recipe = recipe
+                    if let recipe = recipe.recipes?.first {
+                        self.present(RecipeDetailViewController(with: recipe, index: indexPath), animated: true)
+                    }
+                case .failure(let error):
+                    let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "OK", style: .default) { alertAction in
+                        return
+                    }
+                    
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     //удаление строк

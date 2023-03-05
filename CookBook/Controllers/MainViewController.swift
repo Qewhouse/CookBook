@@ -16,6 +16,7 @@ final class MainViewController: UITabBarController {
 }
 
 extension MainViewController {
+    
     private func setupViews() {
         let popularVC = PopularViewController()
         let favoriteVC = FavoriteViewController()

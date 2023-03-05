@@ -8,5 +8,5 @@
 import Foundation
 
 enum Secrets: String {
-    case apiKey = ""
+    case apiKey = "73fd55a714424229b20abc76421fc3b1"
 }

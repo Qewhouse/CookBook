@@ -38,7 +38,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     //создание TableView
     func createTable() {
-        view.addSubview(tableView)
+        
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifireMenu)
         tableView.delegate = self
@@ -74,6 +74,10 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let numberMenu = indexPath.row
         print(numberMenu)
+        let detailVC = DetailViewController()
+        detailVC.recept = ingredientsArray[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
+       
     }
     
     //удаление строк

@@ -17,7 +17,10 @@ class SearchViewController: UIViewController  {
     var tableView = UITableView()
     
     // Indentifire
-    var indentifireMenu = "Cel"
+    var indentifireMenu = "Cell"
+    
+    //searchArray
+    var searchArray = [String]()
     
     // MenuArray
     var menuArray = ["Cookie","Cake","Pasta","Meat","Soup","Fish","Vegetables","Desert"] // массив для блюд (должен приходить из API)
@@ -26,10 +29,7 @@ class SearchViewController: UIViewController  {
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
     
     //ImageArray
-    var imageArray = "AppIcon" //переделается в массив UIImage
-
-    //FilterArray
-    var filterArray = [String]()
+    var imageArray = "AppIcon" //переделается в массив 
     
     //Search is empty
     var searchBarIsEmpty: Bool {
@@ -62,12 +62,11 @@ extension SearchViewController: UISearchResultsUpdating {
         
     }
 }
-
 //MARK: - Table View
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     //создание TableView
     func createTable() {
-        view.addSubview(tableView)
+        
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifireMenu)
         tableView.delegate = self
@@ -78,20 +77,20 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     //установка количество строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        menuArray.count
+        searchArray.count
     }
     
     //установка текста и изображения в TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: indentifireMenu, for: indexPath)
-        let menuText = menuArray[indexPath.row]
-        let imageView = imageArray
-        let ingredients = ingredientsArray[indexPath.row]
+        let menuText = searchArray[indexPath.row]
+//        let imageView = imageArray
+//        let ingredients = ingredientsArray[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
         content.text = menuText //устанавливаем навзвание блюда
-        content.secondaryText = ingredients // устанавливаем ингридиенты
-        content.image = UIImage(named: imageView) //устанавливаем изображение
+//        content.secondaryText = ingredients // устанавливаем ингридиенты
+//        content.image = UIImage(named: imageView) //устанавливаем изображение
         content.imageProperties.cornerRadius = tableView.rowHeight / 2
         
         cell.contentConfiguration = content

@@ -82,7 +82,6 @@ extension ApiURL {
         return url
     }
     
-    
     static func arrayToString (array: [String]) -> String {
 
         var finalString: String = ""
@@ -106,5 +105,4 @@ extension ApiURL {
         
         return components.url
     }
-    
 }

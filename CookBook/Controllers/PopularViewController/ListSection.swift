@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ListSection {
     case trendingNow([ListItem])
     case popularCategoryButton([ListItem])

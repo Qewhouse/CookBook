@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol NetworkManagerProtocol: AnyObject {
     
     func fetchRecipes(_ url: ApiURL, then completionBlock: @escaping(Result<RecipeModel, Error>) -> Void)

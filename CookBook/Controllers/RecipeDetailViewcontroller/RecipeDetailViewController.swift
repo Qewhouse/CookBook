@@ -5,9 +5,7 @@
 //  Created by Sergey on 03.03.2023.
 //
 
-import Foundation
 import UIKit
-
 
 class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     // Create Enum for image size

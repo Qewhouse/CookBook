@@ -5,8 +5,6 @@
 //  Created by Sergey on 03.03.2023.
 //
 
-import Foundation
-import Foundation
 import UIKit
 
 class IngredientsCollectionView: UICollectionView {
@@ -68,8 +66,6 @@ class IngredientsCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setViews()
@@ -84,7 +80,6 @@ class IngredientsCollectionViewCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(checkImage)
-        
     }
     
     private func layoutViews() {

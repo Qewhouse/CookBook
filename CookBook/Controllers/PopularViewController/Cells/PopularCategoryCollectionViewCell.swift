@@ -123,6 +123,5 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             creatorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             creatorLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
-        
     }
 }

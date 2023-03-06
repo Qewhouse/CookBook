@@ -72,7 +72,6 @@ struct Recipe: Codable, Equatable {
         }
         return false
     }
-    
 }
 
 struct Ingredient: Codable {

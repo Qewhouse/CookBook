@@ -91,6 +91,5 @@ class TrendingCollectionViewCell: UICollectionViewCell {
             creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
-        
     }
 }

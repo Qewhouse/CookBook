@@ -9,7 +9,6 @@ import UIKit
 
 class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
-    
     private let recipeImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -92,6 +91,5 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
-        
     }
 }

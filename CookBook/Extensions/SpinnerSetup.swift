@@ -15,5 +15,4 @@ extension UIActivityIndicatorView {
         spinner.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
     }
-
 }

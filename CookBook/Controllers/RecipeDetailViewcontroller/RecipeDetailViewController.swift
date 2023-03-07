@@ -152,7 +152,7 @@ private extension RecipeDetailViewController {
     //Make view content (tags, ingredients label, preparations label)
     
     func configureViewWithData() {
-        
+        customView.backgroundColor = .systemBackground
         customView.titleLabel.text = recipeData.title
         customView.sourceLabel.text = "by: \(recipeData.sourceName ?? "uknown")"
         customView.prepTimeLabel.text = "\(recipeData.readyInMinutes) Min"

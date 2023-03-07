@@ -9,10 +9,13 @@ import UIKit
 
 class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    
     
     private let recipeImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.contentScaleFactor = 1.0
         imageView.layer.cornerRadius = Theme.imageCornerRadius
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,8 +25,8 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     private let recipeLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.minimumScaleFactor = 0.7
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,8 +66,19 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         addSubview(creatorLabel)
     }
     
-    func configureCell(recipeImageName: String, recipeName: String, creatorImageName: String, creatorName: String) {
-        recipeImageView.image = UIImage(named: recipeImageName)
+    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String) {
+        if let image = recipeImage {
+            spinner.removeFromSuperview()
+            recipeImageView.image = image
+            recipeImageView.layer.shadowColor = UIColor.black.cgColor
+            recipeImageView.layer.shadowRadius = 3.0
+            recipeImageView.layer.shadowOpacity = 1.0
+            recipeImageView.layer.shadowOffset = CGSize(width: 0, height: 15)
+        } else {
+            addSubview(spinner)
+            spinner.makeSpinner(recipeImageView)
+        }
+    //    recipeImageView.image = UIImage(named: recipeImageName)
         recipeLabel.text = recipeName
         creatorImageView.image = UIImage(named: creatorImageName)
         creatorLabel.text = "By \(creatorName)"
@@ -80,7 +94,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             
             recipeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             recipeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            recipeLabel.heightAnchor.constraint(equalToConstant: 15),
+            recipeLabel.heightAnchor.constraint(equalToConstant: 40),
             recipeLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
             
             creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),

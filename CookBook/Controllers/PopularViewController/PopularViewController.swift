@@ -8,16 +8,22 @@
 import UIKit
 
 class PopularViewController: UIViewController {
+    
+    var networkManager = NetworkManager()
+    var randomRecipes: [Recipe]?
+    var mealRecipes: [Recipe]?
+    var hourRecipe: [Recipe]?
+    
     // Collection view / Compositional Layout
-    private let topScreenLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Get amazing recipes for cooking"
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+//    private let topScreenLabel: UILabel = {
+//       let label = UILabel()
+//        label.text = "Get amazing recipes for cooking"
+//        label.adjustsFontSizeToFitWidth = true
+//        label.font = UIFont.boldSystemFont(ofSize: 30)
+//        label.numberOfLines = 0
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
     
     private let collectionView: UICollectionView = {
        let collectionViewLayout = UICollectionViewLayout()
@@ -32,7 +38,7 @@ class PopularViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchRandomData()
         setupViews()
         setConstraints()
         setDelegates()
@@ -41,7 +47,7 @@ class PopularViewController: UIViewController {
     private func setupViews() {
 //        view.backgroundColor = Theme.whiteColor
         
-        view.addSubview(topScreenLabel)
+//        view.addSubview(topScreenLabel)
         view.addSubview(collectionView)
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCollectionViewCell")
         collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")
@@ -60,6 +66,47 @@ class PopularViewController: UIViewController {
 //MARK: - Create Layout
 
 extension PopularViewController {
+// Метод получения рецептов по тегам - meal, количество получаемых рецептов - number
+    
+    func fetchDataByMeal(_ meal: String) {
+        networkManager.fetchRecipes(.randomSearch(number: 10, tags: [meal])) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    if let recipes = data.recipes {
+                        
+                        // сюда приходит массив рецептов
+                    }
+                case .failure(let error):
+                    
+                    self.showErrorAlert(error: error)
+                    
+                }
+            }
+        }
+    }
+    
+// Метод получения случайных рецептов. Количество - number
+    func fetchRandomData() {
+        networkManager.fetchRecipes(.randomSearch(number: 10)) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    if let recipes = data.recipes {
+                        // сюда приходит массив случайных рецептов
+                        self.randomRecipes = recipes
+                        
+                    }
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
+                }
+            }
+        }
+    }
+    
+
+    
+
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         
@@ -207,9 +254,35 @@ extension PopularViewController: UICollectionViewDataSource {
             return cell
         case .recentRecipe(let recipe):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(recipeImageName: recipe[indexPath.row].image,
-                               recipeName: recipe[indexPath.row].title, creatorImageName: recipe[indexPath.row].photoCreator,
-                               creatorName: recipe[indexPath.row].creatorName)
+            if let randomRecipes = randomRecipes {
+                //Метод получения картинки по сведениям из модели
+                if let imageName = randomRecipes[indexPath.row].image {
+                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.big), size: ImageSizes.big.rawValue) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let data):
+                                cell.configureCell(recipeImage: UIImage(data: data),
+                                                   recipeName: randomRecipes[indexPath.row].title,
+                                                   creatorImageName: recipe[indexPath.row].photoCreator,
+                                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "")
+                            case .failure(let error):
+                                self.showErrorAlert(error: error)
+                            }
+                        }
+                    }
+                }
+                cell.configureCell(recipeImage: nil,
+                                   recipeName: randomRecipes[indexPath.row].title,
+                                   creatorImageName: recipe[indexPath.row].photoCreator,
+                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "")
+                
+            } else {
+                cell.configureCell(recipeImage: nil,
+                                   recipeName: recipe[indexPath.row].title,
+                                   creatorImageName: recipe[indexPath.row].photoCreator,
+                                   creatorName: recipe[indexPath.row].creatorName)
+            }
+            
             return cell
         }
     }
@@ -229,6 +302,19 @@ extension PopularViewController: UICollectionViewDataSource {
     
 }
 
+extension PopularViewController {
+    func showErrorAlert(error: Error) {
+        
+        let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .default) { alertAction in
+            return
+        }
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+        
+    }
+}
+
 
 //MARK: - Set Constraints
 
@@ -236,13 +322,14 @@ extension PopularViewController {
     
     private func setConstraints() {
         
+        
         NSLayoutConstraint.activate([
             
-            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            topScreenLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            topScreenLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+//            topScreenLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//            topScreenLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            collectionView.topAnchor.constraint(equalTo: topScreenLabel.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)

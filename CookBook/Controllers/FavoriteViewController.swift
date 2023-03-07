@@ -76,7 +76,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         let numberMenu = indexPath.row
         print(numberMenu)
         
-        networkManager.fetchRecipes(ApiURL.randomSearch(number: 1, tags: ["burger"])) { [weak self] result in
+        networkManager.fetchRecipes(ApiURL.randomSearch(number: 1, tags: ["Dinner"])) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {

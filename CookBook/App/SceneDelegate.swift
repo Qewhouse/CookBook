@@ -12,7 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     private let onboardingViewController = OnboardingViewController()
-    private let mainViewController = MainViewController()
+    private let mainViewController = CustomTabBarController()
+//    private let mainViewController = MainViewController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -47,9 +48,10 @@ extension SceneDelegate {
     }
     
     private func prepareMainView() {
-        mainViewController.setStatusBar()
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().backgroundColor = Theme.appColor
+        
+//        mainViewController.setStatusBar()
+//        UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().backgroundColor = Theme.appColor
     }
 }
 

@@ -58,6 +58,13 @@ class RecipeDetailView: CustomView {
         return button
     }()
     
+    lazy var favoriteButton: FavoriteButton = {
+        let button = FavoriteButton()
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -173,6 +180,7 @@ class RecipeDetailView: CustomView {
         addSubview(backButton)
         addSubview(scrollView)
         addSubview(spinner)
+        addSubview(favoriteButton)
         scrollView.addSubview(contentView)
         
         contentView.addSubview(titleLabel)
@@ -203,6 +211,12 @@ class RecipeDetailView: CustomView {
         
         // MARK: - Constraints
         NSLayoutConstraint.activate([
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            favoriteButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor),
+            
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),

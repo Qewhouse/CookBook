@@ -32,6 +32,12 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var favoriteButton: FavoriteButton = {
+        let button = FavoriteButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let creatorImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -59,11 +65,13 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {        
+    func setupView() {
+        
         addSubview(recipeImageView)
         addSubview(recipeLabel)
         addSubview(creatorImageView)
         addSubview(creatorLabel)
+        addSubview(favoriteButton)
     }
     
     func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String) {
@@ -87,6 +95,12 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     func setConstraints() {
         
         NSLayoutConstraint.activate([
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor),
+            
             recipeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),

@@ -29,7 +29,7 @@ class PopularViewController: UIViewController {
        let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .none
-        collectionView.bounces = false
+//        collectionView.bounces = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,10 +106,6 @@ extension PopularViewController {
         }
     }
     
-
-    
-
-    
     private func createLayout() -> UICollectionViewCompositionalLayout {
         
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
@@ -149,7 +145,7 @@ extension PopularViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9),
                                                                          heightDimension: .fractionalHeight(0.5)),
                                                        subitems: [item])
-        
+
         let section = createLayoutSection(group: group,
                                           behavior: .groupPaging,
                                           interGroupSpacing: 20,
@@ -301,7 +297,6 @@ extension PopularViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
-    
 }
 
 extension PopularViewController {
@@ -324,18 +319,16 @@ extension PopularViewController {
     
     private func setConstraints() {
         
-        
         NSLayoutConstraint.activate([
             
 //            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
 //            topScreenLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
 //            topScreenLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
-        
     }
 }

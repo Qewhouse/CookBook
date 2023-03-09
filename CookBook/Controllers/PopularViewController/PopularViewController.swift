@@ -30,6 +30,8 @@ class PopularViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .none
         collectionView.bounces = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -46,8 +48,8 @@ class PopularViewController: UIViewController {
     
     private func setupViews() {
 //        view.backgroundColor = Theme.whiteColor
-        
 //        view.addSubview(topScreenLabel)
+        
         view.addSubview(collectionView)
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCollectionViewCell")
         collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")

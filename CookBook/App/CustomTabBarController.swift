@@ -5,7 +5,6 @@
 //  Created by Sergey on 06.03.2023.
 //
 
-import Foundation
 import UIKit
 
 class CustomTabBarController: UITabBarController {
@@ -18,15 +17,12 @@ class CustomTabBarController: UITabBarController {
         let favoritesNavigationController = UINavigationController(rootViewController: FavoriteViewController())
         let searchNavigationController = UINavigationController(rootViewController: SearchViewController())
         
-        
-        
         setViewControllers([popularNavigationController, favoritesNavigationController, searchNavigationController,], animated: false)
         
         customizeTabBar(popularNavigationController, name: "Popular")
         customizeTabBar(favoritesNavigationController, name: "Favorites")
         customizeTabBar(searchNavigationController, name: "Search")
     }
-    
 }
 
 private extension CustomTabBarController {
@@ -41,6 +37,7 @@ private extension CustomTabBarController {
             controller.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemTeal]
             controller.navigationBar.prefersLargeTitles = true
             controller.navigationItem.largeTitleDisplayMode = .automatic
+            
             if #available(iOS 13.0, *) {
                 let navBarApp: UINavigationBarAppearance = UINavigationBarAppearance()
                 navBarApp.configureWithDefaultBackground()

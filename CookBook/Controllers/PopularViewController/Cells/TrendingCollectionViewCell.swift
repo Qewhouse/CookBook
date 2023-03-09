@@ -9,11 +9,14 @@ import UIKit
 
 class TrendingCollectionViewCell: UICollectionViewCell {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    
     private let trendingImageView: UIImageView = {
        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.contentScaleFactor = 1.0
         imageView.layer.cornerRadius = Theme.imageCornerRadius
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -28,12 +31,12 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let creatorImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+//    private let creatorImageView: UIImageView = {
+//       let imageView = UIImageView()
+//        imageView.contentMode = .scaleToFill
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
     
     private let creatorLabel: UILabel = {
        let label = UILabel()
@@ -58,14 +61,26 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     func setupView() {
         addSubview(trendingImageView)
         addSubview(trendingLabel)
-        addSubview(creatorImageView)
+//        addSubview(creatorImageView)
         addSubview(creatorLabel)
     }
     
-    func configureCell(recipeImageName: String, recipeName: String, creatorImageName: String, creatorName: String) {
-        trendingImageView.image = UIImage(named: recipeImageName)
+    func configureCell(recipeImageName: UIImage?, recipeName: String, creatorName: String) {
+        if let image = recipeImageName {
+            spinner.removeFromSuperview()
+            trendingImageView.image = image
+            trendingImageView.layer.shadowColor = UIColor.black.cgColor
+            trendingImageView.layer.shadowRadius = 3.0
+            trendingImageView.layer.shadowOpacity = 1.0
+            trendingImageView.layer.shadowOffset = CGSize(width: 0, height: 15)
+        } else {
+            addSubview(spinner)
+            spinner.makeSpinner(trendingImageView)
+        }
+
+//        trendingImageView.image = UIImage(named: recipeImageName)
         trendingLabel.text = recipeName
-        creatorImageView.image = UIImage(named: creatorImageName)
+//        creatorImageView.image = UIImage(named: creatorImageName)
         creatorLabel.text = "By \(creatorName)"
     }
     
@@ -80,16 +95,16 @@ class TrendingCollectionViewCell: UICollectionViewCell {
             trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             trendingLabel.heightAnchor.constraint(equalToConstant: 15),
-            trendingLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
+            trendingLabel.bottomAnchor.constraint(equalTo: creatorLabel.topAnchor, constant: -10),
             
-            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            creatorImageView.heightAnchor.constraint(equalToConstant: 40),
-            creatorImageView.widthAnchor.constraint(equalToConstant: 40),
+//            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+//            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+//            creatorImageView.heightAnchor.constraint(equalToConstant: 40),
+//            creatorImageView.widthAnchor.constraint(equalToConstant: 40),
             
-            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
-            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
+            creatorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            creatorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }

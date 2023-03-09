@@ -66,7 +66,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         addSubview(creatorLabel)
     }
     
-    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String) {
+    func configureCell(recipeImage: UIImage?, recipeName: String, creatorName: String) {
         if let image = recipeImage {
             spinner.removeFromSuperview()
             recipeImageView.image = image
@@ -80,31 +80,32 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         }
     //    recipeImageView.image = UIImage(named: recipeImageName)
         recipeLabel.text = recipeName
-        creatorImageView.image = UIImage(named: creatorImageName)
+//        creatorImageView.image = UIImage(named: creatorImageName)
         creatorLabel.text = "By \(creatorName)"
     }
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            recipeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            recipeImageView.heightAnchor.constraint(equalTo: widthAnchor.self),
             recipeImageView.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: -10),
             
             recipeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             recipeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             recipeLabel.heightAnchor.constraint(equalToConstant: 40),
-            recipeLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
+            recipeLabel.bottomAnchor.constraint(equalTo: creatorLabel.topAnchor, constant: -10),
             
-            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            creatorImageView.heightAnchor.constraint(equalToConstant: 25),
-            creatorImageView.widthAnchor.constraint(equalToConstant: 25),
+//            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+//            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+//            creatorImageView.heightAnchor.constraint(equalToConstant: 25),
+//            creatorImageView.widthAnchor.constraint(equalToConstant: 25),
             
-            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
-            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
+            creatorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            creatorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    
     private let view: UIView = {
       let view = UIView()
         view.backgroundColor = Theme.yellowColor
@@ -85,8 +87,20 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         backImageView.addSubview(popularCategoryImageView)
     }
     
-    func configureCell(imageName: String, categoryName: String, creatorName: String) {
-        popularCategoryImageView.image = UIImage(named: imageName)
+    func configureCell(imageName: UIImage?, categoryName: String, creatorName: String) {
+        if let image = imageName {
+            spinner.removeFromSuperview()
+            popularCategoryImageView.image = image
+            popularCategoryImageView.layer.shadowColor = UIColor.black.cgColor
+            popularCategoryImageView.layer.shadowRadius = 3.0
+            popularCategoryImageView.layer.shadowOpacity = 1.0
+            popularCategoryImageView.layer.shadowOffset = CGSize(width: 0, height: 15)
+        } else {
+            addSubview(spinner)
+            spinner.makeSpinner(popularCategoryImageView)
+        }
+        
+//        popularCategoryImageView.image = UIImage(named: imageName)
         popularCategoryLabel.text = categoryName
         creatorLabel.text = creatorName
     }

@@ -11,6 +11,8 @@ struct MockData {
     
     static let shared = MockData()
     
+    let mealType = MealType.mealArray
+    
     private let trendingNow: ListSection = {
         .trendingNow([.init(title: "image1", image: "image1", creatorName: "Pam Param", photoCreator: "Avatar1", category: ""),
                       .init(title: "image2", image: "image2", creatorName: "Pam Param", photoCreator: "Avatar2", category: ""),
@@ -26,7 +28,8 @@ struct MockData {
                                 .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Breakfast"),
                                 .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Appetizer"),
                                 .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Noodle"),
-                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Salad"),])
+                                .init(title: "", image: "", creatorName: "", photoCreator: "", category: "Salad")
+        ])
     }()
     
     private let popularCategory: ListSection = {

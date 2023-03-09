@@ -40,11 +40,15 @@ class PopularViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = MealTime.getMealTime()[0]
+        
         fetchRandomData()
+        fetchDataByTime()
         setupViews()
         setConstraints()
         setDelegates()
     }
+    
     
     private func setupViews() {
 //        view.backgroundColor = Theme.whiteColor
@@ -69,6 +73,22 @@ class PopularViewController: UIViewController {
 
 extension PopularViewController {
 // Метод получения рецептов по тегам - meal, количество получаемых рецептов - number
+    
+    func fetchDataByTime() {
+        let time = MealTime.getMealTime()[1]
+        networkManager.fetchRecipes(.randomSearch(number: 10, tags: [time])) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    if let recipes = data.recipes {
+                        self.hourRecipe = recipes
+                    }
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
+                }
+            }
+        }
+    }
     
     func fetchDataByMeal(_ meal: String) {
         networkManager.fetchRecipes(.randomSearch(number: 10, tags: [meal])) { result in
@@ -236,10 +256,43 @@ extension PopularViewController: UICollectionViewDataSource {
             
         case .trendingNow(let now):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCollectionViewCell", for: indexPath) as? TrendingCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(recipeImageName: now[indexPath.row].image,
-                               recipeName: now[indexPath.row].title,
-                               creatorImageName: now[indexPath.row].photoCreator,
-                               creatorName: now[indexPath.row].creatorName)
+            if let hourRecipe = hourRecipe {
+                //Метод получения картинки по сведениям из модели
+                if let imageName = hourRecipe[indexPath.row].image {
+                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.big), size: ImageSizes.big.rawValue) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let data):
+                                cell.configureCell(recipeImage: UIImage(data: data),
+                                                   recipeName: hourRecipe[indexPath.row].title,
+                                                   creatorImageName: now[indexPath.row].photoCreator,
+                                                   creatorName: hourRecipe[indexPath.row].sourceName ?? "",
+                                                   recipeID: hourRecipe[indexPath.row].id)
+                            case .failure(let error):
+                                self.showErrorAlert(error: error)
+                            }
+                        }
+                    }
+                }
+                cell.configureCell(recipeImage: nil,
+                                   recipeName: hourRecipe[indexPath.row].title,
+                                   creatorImageName: now[indexPath.row].photoCreator,
+                                   creatorName: hourRecipe[indexPath.row].sourceName ?? "",
+                                   recipeID: hourRecipe[indexPath.row].id)
+                
+            } else {
+                cell.configureCell(recipeImage: nil,
+                                   recipeName: now[indexPath.row].title,
+                                   creatorImageName: now[indexPath.row].photoCreator,
+                                   creatorName: now[indexPath.row].creatorName,
+                                   recipeID: 0)
+            }
+            
+//            cell.configureCell(recipeImage: nil,
+//                               recipeName: now[indexPath.row].title,
+//                               creatorImageName: now[indexPath.row].photoCreator,
+//                               creatorName: now[indexPath.row].creatorName,
+//            recipeID: 0)
             return cell
         case .popularCategoryButton(let button):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
@@ -262,7 +315,8 @@ extension PopularViewController: UICollectionViewDataSource {
                                 cell.configureCell(recipeImage: UIImage(data: data),
                                                    recipeName: randomRecipes[indexPath.row].title,
                                                    creatorImageName: recipe[indexPath.row].photoCreator,
-                                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "")
+                                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "",
+                                                   recipeID: randomRecipes[indexPath.row].id)
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }
@@ -272,13 +326,15 @@ extension PopularViewController: UICollectionViewDataSource {
                 cell.configureCell(recipeImage: nil,
                                    recipeName: randomRecipes[indexPath.row].title,
                                    creatorImageName: recipe[indexPath.row].photoCreator,
-                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "")
+                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "",
+                                   recipeID: randomRecipes[indexPath.row].id)
                 
             } else {
                 cell.configureCell(recipeImage: nil,
                                    recipeName: recipe[indexPath.row].title,
                                    creatorImageName: recipe[indexPath.row].photoCreator,
-                                   creatorName: recipe[indexPath.row].creatorName)
+                                   creatorName: recipe[indexPath.row].creatorName,
+                                   recipeID: 0)
             }
             
             return cell

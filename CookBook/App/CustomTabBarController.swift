@@ -16,7 +16,6 @@ class CustomTabBarController: UITabBarController {
         let popularNavigationController = UINavigationController(rootViewController: PopularViewController())
         let favoritesNavigationController = UINavigationController(rootViewController: FavoriteViewController())
         let searchNavigationController = UINavigationController(rootViewController: SearchViewController())
-        
         setViewControllers([popularNavigationController, favoritesNavigationController, searchNavigationController,], animated: false)
         
         customizeTabBar(popularNavigationController, name: "Popular")

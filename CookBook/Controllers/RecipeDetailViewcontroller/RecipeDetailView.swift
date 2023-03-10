@@ -11,6 +11,7 @@ import TagListView
 protocol DetailViewDelegate: AnyObject {
     func detailView(didTapBackButton button: UIButton)
     func detailView(didTapInstructionsButton button: UIButton)
+    func detailView(didTapFavoriteButton button: FavoriteButton)
 }
 
 class RecipeDetailView: CustomView {
@@ -54,6 +55,13 @@ class RecipeDetailView: CustomView {
         button.setImage(image, for: .normal)
         button.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var favoriteButton: FavoriteButton = {
+        let button = FavoriteButton()
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -173,6 +181,7 @@ class RecipeDetailView: CustomView {
         addSubview(backButton)
         addSubview(scrollView)
         addSubview(spinner)
+        addSubview(favoriteButton)
         scrollView.addSubview(contentView)
         
         contentView.addSubview(titleLabel)
@@ -194,6 +203,7 @@ class RecipeDetailView: CustomView {
         contentView.addSubview(prepDivider)
         
         backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchUpInside)
         
         contentView.clipsToBounds = false
     }
@@ -203,6 +213,12 @@ class RecipeDetailView: CustomView {
         
         // MARK: - Constraints
         NSLayoutConstraint.activate([
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            favoriteButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor),
+            
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
@@ -360,5 +376,9 @@ private extension RecipeDetailView {
     
     @objc func didTapInstructionsButton(_ button: UIButton) {
         delegate?.detailView(didTapInstructionsButton: button)
+    }
+    
+    @objc func didTapFavoriteButton(_ button: FavoriteButton) {
+        delegate?.detailView(didTapFavoriteButton: button)
     }
 }

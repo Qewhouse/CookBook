@@ -9,6 +9,9 @@ import UIKit
 
 class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+    var recipeID: Int?
+    
     private let view: UIView = {
       let view = UIView()
         view.backgroundColor = Theme.yellowColor
@@ -37,6 +40,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -85,10 +89,21 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         backImageView.addSubview(popularCategoryImageView)
     }
     
-    func configureCell(imageName: String, categoryName: String, creatorName: String) {
-        popularCategoryImageView.image = UIImage(named: imageName)
-        popularCategoryLabel.text = categoryName
+    func configureCell(image: UIImage?, recipeName: String, creatorName: String, recipeID: Int) {
+        if let image = image {
+            spinner.removeFromSuperview()
+            popularCategoryImageView.image = image
+            popularCategoryImageView.layer.shadowColor = UIColor.black.cgColor
+            popularCategoryImageView.layer.shadowRadius = 3.0
+            popularCategoryImageView.layer.shadowOpacity = 1.0
+            popularCategoryImageView.layer.shadowOffset = CGSize(width: 0, height: 15)
+        } else {
+            addSubview(spinner)
+            spinner.makeSpinner(popularCategoryImageView)
+        }
+        popularCategoryLabel.text = recipeName
         creatorLabel.text = creatorName
+        self.recipeID = recipeID
     }
     
     func setConstraints() {

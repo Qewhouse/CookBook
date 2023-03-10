@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     // Create Enum for image size
     enum IngredientsSizes {
@@ -65,14 +66,24 @@ class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         customView.backgroundDimmedLayer.frame = customView.backgroundImageView.bounds
-        let back = customView.backButton
-        back.layer.cornerRadius = 0.5 * back.bounds.size.width
+        let backLayer = customView.backButton
+        let favoriteLayer = customView.favoriteButton
+        backLayer.layer.cornerRadius = 0.5 * backLayer.bounds.size.width
+        favoriteLayer.layer.cornerRadius = 0.5 * favoriteLayer.bounds.size.width
     }
 }
 
 // MARK: - DetailViewDelegate
 
 extension RecipeDetailViewController: DetailViewDelegate {
+    func detailView(didTapFavoriteButton button: FavoriteButton) {
+        if button.isFavorite == false {
+            button.setActive()
+        } else {
+            button.setInactive()
+        }
+    }
+    
     func detailView(didTapBackButton button: UIButton) {
         dismiss(animated: true)
     }
@@ -220,8 +231,6 @@ private extension RecipeDetailViewController {
             let string = NSMutableAttributedString(string: "  \(step.step)\n\n")
             finalString.append(indexString)
             finalString.append(string)
-            
-            //finalString += "\(step.number). \(step.step)\n\n"
         }
         customView.buildInstructions(with: finalString)
     }

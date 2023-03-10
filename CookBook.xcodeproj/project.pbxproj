@@ -53,6 +53,7 @@
 		A57D6B3A29B208F300D67DC6 /* IngredientsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3929B208F300D67DC6 /* IngredientsCollectionView.swift */; };
 		A57D6B3E29B27E3500D67DC6 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */; };
 		A598C63429B5001A00CA071C /* SpinnerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598C63329B5001A00CA071C /* SpinnerSetup.swift */; };
+		A5B92A7C29B86CBA001A9554 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B92A7B29B86CBA001A9554 /* FavoriteButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		A57D6B3929B208F300D67DC6 /* IngredientsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCollectionView.swift; sourceTree = "<group>"; };
 		A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		A598C63329B5001A00CA071C /* SpinnerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerSetup.swift; sourceTree = "<group>"; };
+		A5B92A7B29B86CBA001A9554 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		D466C558EDECDA6D2526FE68 /* Pods-CookBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookBook.debug.xcconfig"; path = "Target Support Files/Pods-CookBook/Pods-CookBook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 				A57D6B2F29B1FBC100D67DC6 /* CustomViewController.swift */,
 				A57D6B3129B1FBD500D67DC6 /* CustomView.swift */,
 				A5694FD629B5E4A8000B293A /* CustomTabBarController.swift */,
+				A5B92A7B29B86CBA001A9554 /* FavoriteButton.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -190,7 +193,6 @@
 			children = (
 				372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */,
 				A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */,
-				A598C63329B5001A00CA071C /* SpinnerSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,6 +215,7 @@
 			children = (
 				37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */,
 				37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */,
+				A598C63329B5001A00CA071C /* SpinnerSetup.swift */,
 				37F2FF5E29B1C4CC00198B15 /* ImageType.swift */,
 				37F2FF5D29B1C4CC00198B15 /* URLManager.swift */,
 				37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */,
@@ -432,6 +435,7 @@
 				372C270029AB850A009AFF7B /* FavoriteViewController.swift in Sources */,
 				37F2FF6029B1C4CC00198B15 /* RecipesModel.swift in Sources */,
 				A5694FD929B66D69000B293A /* MealType.swift in Sources */,
+				A5B92A7C29B86CBA001A9554 /* FavoriteButton.swift in Sources */,
 				A57D6B2E29B1FB7000D67DC6 /* LocalServices.swift in Sources */,
 				A57D6B3A29B208F300D67DC6 /* IngredientsCollectionView.swift in Sources */,
 				372C270429AB857F009AFF7B /* UIViewController+Utilities.swift in Sources */,

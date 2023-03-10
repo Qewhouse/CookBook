@@ -11,6 +11,7 @@ import TagListView
 protocol DetailViewDelegate: AnyObject {
     func detailView(didTapBackButton button: UIButton)
     func detailView(didTapInstructionsButton button: UIButton)
+    func detailView(didTapFavoriteButton button: FavoriteButton)
 }
 
 class RecipeDetailView: CustomView {
@@ -202,6 +203,7 @@ class RecipeDetailView: CustomView {
         contentView.addSubview(prepDivider)
         
         backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchUpInside)
         
         contentView.clipsToBounds = false
     }
@@ -374,5 +376,9 @@ private extension RecipeDetailView {
     
     @objc func didTapInstructionsButton(_ button: UIButton) {
         delegate?.detailView(didTapInstructionsButton: button)
+    }
+    
+    @objc func didTapFavoriteButton(_ button: FavoriteButton) {
+        delegate?.detailView(didTapFavoriteButton: button)
     }
 }

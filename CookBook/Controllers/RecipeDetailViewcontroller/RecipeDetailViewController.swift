@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     // Create Enum for image size
     enum IngredientsSizes {
@@ -75,6 +76,14 @@ class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
 // MARK: - DetailViewDelegate
 
 extension RecipeDetailViewController: DetailViewDelegate {
+    func detailView(didTapFavoriteButton button: FavoriteButton) {
+        if button.isFavorite == false {
+            button.setActive()
+        } else {
+            button.setInactive()
+        }
+    }
+    
     func detailView(didTapBackButton button: UIButton) {
         dismiss(animated: true)
     }

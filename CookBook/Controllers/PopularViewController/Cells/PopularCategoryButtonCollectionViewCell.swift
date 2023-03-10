@@ -68,8 +68,6 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     
     lazy var button: UIButton = {
         let button = UIButton(type: .system)
-//        button.backgroundColor = Theme.yellowColor
-        button.layer.cornerRadius = Theme.buttonCornerRadius
         button.tintColor = .gray
         button.titleLabel?.numberOfLines = 0
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -89,8 +87,13 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func buttonTapped() {
-        
+//        backgroundColor = .none
+//        _ = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
     }
+    
+//    @objc func updateUI() {
+//        backgroundColor = Theme.yellowColor
+//    }
     
     func setupView() {
         addSubview(button)
@@ -100,12 +103,6 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         button.setTitle(buttonName, for: .normal)
     }
     
-    func isSelected() {
-        if button.isSelected {
-            button.backgroundColor = Theme.yellowColor
-            button.tintColor = .white
-        }
-    }
     
     func setConstraints() {
         

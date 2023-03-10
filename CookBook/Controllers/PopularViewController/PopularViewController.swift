@@ -15,22 +15,10 @@ class PopularViewController: UIViewController {
     var hourRecipe: [Recipe]?
     let buttonsName = MealType.mealArray
     
-    // Collection view / Compositional Layout
-//    private let topScreenLabel: UILabel = {
-//       let label = UILabel()
-//        label.text = "Get amazing recipes for cooking"
-//        label.adjustsFontSizeToFitWidth = true
-//        label.font = UIFont.boldSystemFont(ofSize: 30)
-//        label.numberOfLines = 0
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-    
     private let collectionView: UICollectionView = {
        let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .none
-//        collectionView.bounces = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,9 +41,7 @@ class PopularViewController: UIViewController {
     
     
     private func setupViews() {
-//        view.backgroundColor = Theme.whiteColor
-//        view.addSubview(topScreenLabel)
-        
+
         view.addSubview(collectionView)
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCollectionViewCell")
         collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")
@@ -100,7 +86,6 @@ extension PopularViewController {
                     if let recipes = data.recipes {
                         // сюда приходит массив рецептов
                         self.mealRecipes = recipes
-//                        self.collectionView.reloadData()
                         self.collectionView.reloadData()
                     }
                 case .failure(let error):
@@ -201,7 +186,7 @@ extension PopularViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
-                                                                         heightDimension: .fractionalHeight(0.35)),
+                                                                         heightDimension: .fractionalHeight(0.25)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
@@ -218,7 +203,7 @@ extension PopularViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.4),
-                                                                         heightDimension: .fractionalHeight(0.4)),
+                                                                         heightDimension: .fractionalHeight(0.3)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
@@ -252,7 +237,7 @@ extension PopularViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        sections[section].count
+        randomRecipes?.count ?? 10
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
@@ -277,7 +262,7 @@ extension PopularViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
             
-        case .trendingNow(let now):
+        case .trendingNow(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCollectionViewCell", for: indexPath) as? TrendingCollectionViewCell else { return UICollectionViewCell() }
             if let hourRecipe = hourRecipe {
                 //Метод получения картинки по сведениям из модели
@@ -288,8 +273,7 @@ extension PopularViewController: UICollectionViewDataSource {
                             case .success(let data):
                                 cell.configureCell(recipeImage: UIImage(data: data),
                                                    recipeName: hourRecipe[indexPath.row].title,
-                                                   creatorImageName: now[indexPath.row].photoCreator,
-                                                   creatorName: hourRecipe[indexPath.row].sourceName ?? "",
+                                                   readyInMinutes: hourRecipe[indexPath.row].readyInMinutes,
                                                    recipeID: hourRecipe[indexPath.row].id)
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
@@ -299,15 +283,13 @@ extension PopularViewController: UICollectionViewDataSource {
                 }
                 cell.configureCell(recipeImage: nil,
                                    recipeName: hourRecipe[indexPath.row].title,
-                                   creatorImageName: now[indexPath.row].photoCreator,
-                                   creatorName: hourRecipe[indexPath.row].sourceName ?? "",
+                                   readyInMinutes: hourRecipe[indexPath.row].readyInMinutes,
                                    recipeID: hourRecipe[indexPath.row].id)
                 
             } else {
                 cell.configureCell(recipeImage: nil,
-                                   recipeName: now[indexPath.row].title,
-                                   creatorImageName: now[indexPath.row].photoCreator,
-                                   creatorName: now[indexPath.row].creatorName,
+                                   recipeName: "",
+                                   readyInMinutes: 1,
                                    recipeID: 0)
             }
             
@@ -316,7 +298,7 @@ extension PopularViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(buttonName: buttonsName[indexPath.row])
             return cell
-        case .popularCategory(let category):
+        case .popularCategory(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }
             if let mealRecipes = mealRecipes {
                 if let image = mealRecipes[indexPath.row].image {
@@ -327,7 +309,7 @@ extension PopularViewController: UICollectionViewDataSource {
                             case .success(let data):
                                 cell.configureCell(image: UIImage(data: data),
                                                    recipeName: mealRecipes[indexPath.row].title,
-                                                   creatorName: mealRecipes[indexPath.row].sourceName ?? "",
+                                                   readyInMinutes: mealRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: mealRecipes[indexPath.row].id)
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
@@ -337,18 +319,18 @@ extension PopularViewController: UICollectionViewDataSource {
                 } else {
                     cell.configureCell(image: nil,
                                        recipeName: mealRecipes[indexPath.row].title,
-                                       creatorName: mealRecipes[indexPath.row].sourceName ?? "",
+                                       readyInMinutes: mealRecipes[indexPath.row].readyInMinutes,
                                        recipeID: mealRecipes[indexPath.row].id)
                 }
             } else {
                 
                 cell.configureCell(image: nil,
-                                   recipeName:  category[indexPath.row].title,
-                                   creatorName: category[indexPath.row].creatorName,
+                                   recipeName: "",
+                                   readyInMinutes: 1,
                                    recipeID: 0)
             }
             return cell
-        case .recentRecipe(let recipe):
+        case .recentRecipe(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
             if let randomRecipes = randomRecipes {
                 //Метод получения картинки по сведениям из модели
@@ -359,8 +341,7 @@ extension PopularViewController: UICollectionViewDataSource {
                             case .success(let data):
                                 cell.configureCell(recipeImage: UIImage(data: data),
                                                    recipeName: randomRecipes[indexPath.row].title,
-                                                   creatorImageName: recipe[indexPath.row].photoCreator,
-                                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "",
+                                                   readyInMinutes: randomRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: randomRecipes[indexPath.row].id)
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
@@ -370,15 +351,13 @@ extension PopularViewController: UICollectionViewDataSource {
                 }
                 cell.configureCell(recipeImage: nil,
                                    recipeName: randomRecipes[indexPath.row].title,
-                                   creatorImageName: recipe[indexPath.row].photoCreator,
-                                   creatorName: randomRecipes[indexPath.row].sourceName ?? "",
+                                   readyInMinutes: randomRecipes[indexPath.row].readyInMinutes,
                                    recipeID: randomRecipes[indexPath.row].id)
                 
             } else {
                 cell.configureCell(recipeImage: nil,
-                                   recipeName: recipe[indexPath.row].title,
-                                   creatorImageName: recipe[indexPath.row].photoCreator,
-                                   creatorName: recipe[indexPath.row].creatorName,
+                                   recipeName: "",
+                                   readyInMinutes: 1,
                                    recipeID: 0)
             }
             
@@ -422,11 +401,6 @@ extension PopularViewController {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            
-//            topScreenLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-//            topScreenLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//            topScreenLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),

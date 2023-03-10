@@ -171,7 +171,7 @@ extension PopularViewController {
                                                        subitems: [item])
 
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -188,7 +188,7 @@ extension PopularViewController {
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 5,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -205,7 +205,7 @@ extension PopularViewController {
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -222,7 +222,7 @@ extension PopularViewController {
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)

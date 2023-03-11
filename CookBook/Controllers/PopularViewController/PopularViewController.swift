@@ -267,7 +267,7 @@ extension PopularViewController: UICollectionViewDataSource {
             if let hourRecipe = hourRecipe {
                 //Метод получения картинки по сведениям из модели
                 if let imageName = hourRecipe[indexPath.row].image {
-                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.big), size: ImageSizes.big.rawValue) { result in
+                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.medium), size: ImageSizes.medium.rawValue) { result in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let data):
@@ -307,7 +307,7 @@ extension PopularViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }
             if let mealRecipes = mealRecipes {
                 if let image = mealRecipes[indexPath.row].image {
-                    networkManager.fetchImage(for: .recipe, with: image.changeImageSize(to: .big), size: ImageSizes.big.rawValue) { result in
+                    networkManager.fetchImage(for: .recipe, with: image.changeImageSize(to: .medium), size: ImageSizes.medium.rawValue) { result in
                         DispatchQueue.main.async {
                             switch result {
                                 
@@ -340,7 +340,7 @@ extension PopularViewController: UICollectionViewDataSource {
             if let randomRecipes = randomRecipes {
                 //Метод получения картинки по сведениям из модели
                 if let imageName = randomRecipes[indexPath.row].image {
-                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.big), size: ImageSizes.big.rawValue) { result in
+                    networkManager.fetchImage(for: .recipe, with: imageName.changeImageSize(to: ImageSizes.medium), size: ImageSizes.medium.rawValue) { result in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let data):

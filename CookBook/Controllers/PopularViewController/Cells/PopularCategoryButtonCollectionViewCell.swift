@@ -72,6 +72,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         button.layer.cornerRadius = Theme.buttonCornerRadius
         button.tintColor = .gray
         button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button

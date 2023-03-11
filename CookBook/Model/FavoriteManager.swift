@@ -46,13 +46,6 @@ class FavoriteManager: FavoriteManagerProtocol {
                     completionBlock(.failure(error))
                 }
             }
-            
-
-            
-            
-            
-            
-            
         }
     }
     

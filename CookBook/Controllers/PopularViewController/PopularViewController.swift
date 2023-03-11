@@ -317,9 +317,10 @@ extension PopularViewController: UICollectionViewDataSource {
             }
             
         case .recentRecipe(_):
-            if let cell = collectionView.cellForItem(at: indexPath) as? RecentRecipeCollectionViewCell {
-                cell.prepareForReuse()
-            }
+//            if let cell = collectionView.cellForItem(at: indexPath) as? RecentRecipeCollectionViewCell {
+//                cell.prepareForReuse()
+//            }
+            return
         }
     }
     

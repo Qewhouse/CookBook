@@ -69,6 +69,7 @@ extension PopularViewController {
                 case .success(let data):
                     if let recipes = data.recipes {
                         self.hourRecipe = recipes
+                        self.collectionView.reloadSections(IndexSet(integer: 0))
                     }
                 case .failure(let error):
                     self.showErrorAlert(error: error)

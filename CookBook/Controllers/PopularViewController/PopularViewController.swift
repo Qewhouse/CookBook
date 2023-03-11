@@ -85,7 +85,7 @@ extension PopularViewController {
                     if let recipes = data.recipes {
                         // сюда приходит массив рецептов
                         self.mealRecipes = recipes
-                        self.collectionView.reloadData()
+                        self.collectionView.reloadSections(IndexSet(integer: 2))
                     }
                 case .failure(let error):
                     
@@ -122,6 +122,7 @@ extension PopularViewController {
 
             switch section {
             case .trendingNow(_):
+                
                 return self.createTrendingNowSection()
             case .popularCategory(_):
                 return self.createPopularCategorySection()
@@ -240,12 +241,21 @@ extension PopularViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
-
+            
         case .trendingNow(_):
             return
         case .popularCategoryButton(_):
+            
+            
+            
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
                 let meal = cell.mealButton.titleLabel?.text
+                cell.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
+                cell.layer.cornerRadius = 10
+                cell.layer.shadowRadius = 3.0
+                cell.layer.shadowColor = UIColor.systemBlue.cgColor
+                cell.layer.shadowOpacity = 1.0
+                cell.layer.shadowOffset = CGSize(width: 0, height: 10)
                 
 //                cell.buttonTapped()
                 if let meal = meal {

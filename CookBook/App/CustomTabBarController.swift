@@ -69,6 +69,8 @@ private extension CustomTabBarController {
         case "Search":
             controller.tabBarItem.image = UIImage(systemName: "magnifyingglass")
             controller.tabBarItem.selectedImage = UIImage(systemName: "plus.magnifyingglass")
+            controller.navigationBar.prefersLargeTitles = true
+            controller.navigationItem.largeTitleDisplayMode = .automatic
         default:
             print("Undefined case")
             break

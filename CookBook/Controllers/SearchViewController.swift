@@ -50,14 +50,14 @@ extension SearchViewController: UISearchResultsUpdating {
     func setupsearchBar() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "enter"
+        searchController.searchBar.placeholder = "search for something to cook"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+        guard let text = searchController.searchBar.text else { return }
     }
 }
 

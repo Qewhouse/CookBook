@@ -10,6 +10,7 @@ import UIKit
 protocol NetworkManagerProtocol: AnyObject {
     
     func fetchRecipes(_ url: ApiURL, then completionBlock: @escaping(Result<RecipeModel, Error>) -> Void)
+    func fetchRecipeByID(_ url: ApiURL, then completionBlock: @escaping(Result<Data, Error>) -> Void)
     func fetchImage(for imageType: ImageType, with name: String, size: String?, completionBlock: @escaping(Result<Data, Error>) -> Void)
     
 }
@@ -37,6 +38,24 @@ class NetworkManager: NetworkManagerProtocol {
                 completionBlock(.failure(error))
             }
         }
+    }
+    
+    func fetchRecipeByID(_ url: ApiURL, then completionBlock: @escaping (Result<Data, Error>) -> Void) {
+        
+        guard let url = url.url else {
+            completionBlock(.failure(NetworkError.wrongUrl))
+            return
+        }
+        
+        loadDataFromUrl(url) { result in
+            switch result {
+            case .success(let data):
+                completionBlock(.success(data))
+            case .failure(let error):
+                completionBlock(.failure(error))
+            }
+        }
+        
     }
     
     func fetchImage(for imageType: ImageType, with name: String, size: String?, completionBlock: @escaping (Result<Data, Error>) -> Void) {

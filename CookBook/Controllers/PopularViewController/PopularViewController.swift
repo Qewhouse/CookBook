@@ -63,7 +63,7 @@ extension PopularViewController {
     
     func fetchDataByTime() {
         let time = MealTime.getMealTime()[1]
-        networkManager.fetchRecipes(.randomSearch(number: 10, tags: [time])) { result in
+        networkManager.fetchRecipes(.randomSearch(number: Theme.countOfRecipes, tags: [time])) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
@@ -78,7 +78,7 @@ extension PopularViewController {
     }
     
     func fetchDataByMeal(_ meal: String) {
-        networkManager.fetchRecipes(.randomSearch(number: 10, tags: [meal])) { result in
+        networkManager.fetchRecipes(.randomSearch(number: Theme.countOfRecipes, tags: [meal])) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
@@ -98,7 +98,7 @@ extension PopularViewController {
     
 // Метод получения случайных рецептов. Количество - number
     func fetchRandomData() {
-        networkManager.fetchRecipes(.randomSearch(number: 10)) { result in
+        networkManager.fetchRecipes(.randomSearch(number: Theme.countOfRecipes)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):

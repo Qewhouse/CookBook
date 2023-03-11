@@ -40,12 +40,13 @@
 		5725092E29AFD293003A5933 /* Avatar3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5725092B29AFD293003A5933 /* Avatar3.png */; };
 		5725093029B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */; };
 		7052D6FDF2E28245C56DAA4F /* Pods_CookBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DA195663B2C5C626368507 /* Pods_CookBook.framework */; };
+		A507AD3629BC792900AD3A44 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507AD3529BC792900AD3A44 /* FavoriteManager.swift */; };
+		A507AD3829BC967900AD3A44 /* FavoriteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507AD3729BC967900AD3A44 /* FavoriteError.swift */; };
 		A5694FD729B5E4A8000B293A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5694FD629B5E4A8000B293A /* CustomTabBarController.swift */; };
 		A5694FD929B66D69000B293A /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5694FD829B66D69000B293A /* MealType.swift */; };
 		A5694FDB29B7AC87000B293A /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5694FDA29B7AC87000B293A /* TimeManager.swift */; };
 		A57D6B2A29B1F99A00D67DC6 /* NetworkErrorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B2929B1F99A00D67DC6 /* NetworkErrorsList.swift */; };
 		A57D6B2C29B1FACE00D67DC6 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B2B29B1FACE00D67DC6 /* RecipeDetailViewController.swift */; };
-		A57D6B2E29B1FB7000D67DC6 /* LocalServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B2D29B1FB7000D67DC6 /* LocalServices.swift */; };
 		A57D6B3029B1FBC100D67DC6 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B2F29B1FBC100D67DC6 /* CustomViewController.swift */; };
 		A57D6B3229B1FBD500D67DC6 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3129B1FBD500D67DC6 /* CustomView.swift */; };
 		A57D6B3629B202C200D67DC6 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D6B3529B202C200D67DC6 /* RecipeDetailView.swift */; };
@@ -93,12 +94,13 @@
 		5725092A29AFD293003A5933 /* Avatar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar2.png; sourceTree = "<group>"; };
 		5725092B29AFD293003A5933 /* Avatar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar3.png; sourceTree = "<group>"; };
 		5725092F29B1405A003A5933 /* PopularCategoryButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		A507AD3529BC792900AD3A44 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
+		A507AD3729BC967900AD3A44 /* FavoriteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteError.swift; sourceTree = "<group>"; };
 		A5694FD629B5E4A8000B293A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		A5694FD829B66D69000B293A /* MealType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealType.swift; sourceTree = "<group>"; };
 		A5694FDA29B7AC87000B293A /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		A57D6B2929B1F99A00D67DC6 /* NetworkErrorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorsList.swift; sourceTree = "<group>"; };
 		A57D6B2B29B1FACE00D67DC6 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
-		A57D6B2D29B1FB7000D67DC6 /* LocalServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalServices.swift; sourceTree = "<group>"; };
 		A57D6B2F29B1FBC100D67DC6 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		A57D6B3129B1FBD500D67DC6 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		A57D6B3529B202C200D67DC6 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
@@ -179,7 +181,6 @@
 				372C26EB29AB4FDE009AFF7B /* SceneDelegate.swift */,
 				372C270529AB863B009AFF7B /* APIKey.swift */,
 				372C270729AB8661009AFF7B /* Theme.swift */,
-				A57D6B2D29B1FB7000D67DC6 /* LocalServices.swift */,
 				A57D6B2F29B1FBC100D67DC6 /* CustomViewController.swift */,
 				A57D6B3129B1FBD500D67DC6 /* CustomView.swift */,
 				A5694FD629B5E4A8000B293A /* CustomTabBarController.swift */,
@@ -222,6 +223,8 @@
 				A57D6B2929B1F99A00D67DC6 /* NetworkErrorsList.swift */,
 				A5694FD829B66D69000B293A /* MealType.swift */,
 				A5694FDA29B7AC87000B293A /* TimeManager.swift */,
+				A507AD3529BC792900AD3A44 /* FavoriteManager.swift */,
+				A507AD3729BC967900AD3A44 /* FavoriteError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				372C26FE29AB8436009AFF7B /* PopularViewController.swift in Sources */,
 				5725091529AE83A5003A5933 /* MockData.swift in Sources */,
 				37F2FF6229B1C4CC00198B15 /* ImageType.swift in Sources */,
+				A507AD3829BC967900AD3A44 /* FavoriteError.swift in Sources */,
 				372C270629AB863B009AFF7B /* APIKey.swift in Sources */,
 				A57D6B2A29B1F99A00D67DC6 /* NetworkErrorsList.swift in Sources */,
 				5725092829AFA4AB003A5933 /* HeaderSupplementaryView.swift in Sources */,
@@ -436,9 +440,9 @@
 				37F2FF6029B1C4CC00198B15 /* RecipesModel.swift in Sources */,
 				A5694FD929B66D69000B293A /* MealType.swift in Sources */,
 				A5B92A7C29B86CBA001A9554 /* FavoriteButton.swift in Sources */,
-				A57D6B2E29B1FB7000D67DC6 /* LocalServices.swift in Sources */,
 				A57D6B3A29B208F300D67DC6 /* IngredientsCollectionView.swift in Sources */,
 				372C270429AB857F009AFF7B /* UIViewController+Utilities.swift in Sources */,
+				A507AD3629BC792900AD3A44 /* FavoriteManager.swift in Sources */,
 				5725092429AE8E04003A5933 /* RecentRecipeCollectionViewCell.swift in Sources */,
 				A57D6B3E29B27E3500D67DC6 /* StringProtocol.swift in Sources */,
 			);

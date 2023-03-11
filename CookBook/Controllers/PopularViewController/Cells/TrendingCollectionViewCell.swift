@@ -9,6 +9,7 @@ import UIKit
 
 class TrendingCollectionViewCell: UICollectionViewCell {
     
+    let favoriteManager = FavoriteManager()
     let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
     var recipeID: Int?
     
@@ -119,8 +120,18 @@ extension TrendingCollectionViewCell {
     @objc func tappedFavoriteButton(_ button: FavoriteButton) {
         if let recipeID = recipeID {
             if button.isFavorite == false {
-                button.setActive()
+               
                 print("Recipe ID is: \(recipeID)")
+                let image = trendingImageView.image?.pngData()
+                favoriteManager.addToFavorite(recipeID: recipeID, recipeImage: image) { result in
+                    switch result {
+                    case .success(_):
+                        button.setActive()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
             } else {
                 button.setInactive()
             }

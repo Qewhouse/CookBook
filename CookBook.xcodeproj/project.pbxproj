@@ -193,7 +193,6 @@
 			children = (
 				372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */,
 				A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */,
-				A598C63329B5001A00CA071C /* SpinnerSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +215,7 @@
 			children = (
 				37F2FF5C29B1C4CC00198B15 /* NetworkManager.swift */,
 				37F2FF5F29B1C4CC00198B15 /* RecipesModel.swift */,
+				A598C63329B5001A00CA071C /* SpinnerSetup.swift */,
 				37F2FF5E29B1C4CC00198B15 /* ImageType.swift */,
 				37F2FF5D29B1C4CC00198B15 /* URLManager.swift */,
 				37F2FF5B29B1C4CC00198B15 /* URLSeachPath.swift */,

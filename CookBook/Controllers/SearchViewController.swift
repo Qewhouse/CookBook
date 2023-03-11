@@ -9,7 +9,9 @@ import UIKit
 
 class SearchViewController: UIViewController  {
     
-    //MARK: - Search + TableView
+    var networkManager = NetworkManager()
+    var randomRecipes: [Recipe]?
+    var mealRecipes: [Recipe]?
     
     var searchController = UISearchController(searchResultsController: nil)
     
@@ -20,7 +22,7 @@ class SearchViewController: UIViewController  {
     var indentifireMenu = "Cel"
     
     // MenuArray
-    var menuArray = ["Cookie","Cake","Pasta","Meat","Soup","Fish","Vegetables","Desert"] // массив для блюд (должен приходить из API)
+    var menuArray = [String]()
 
     //ingredients
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
@@ -28,8 +30,6 @@ class SearchViewController: UIViewController  {
     //ImageArray
     var imageArray = "AppIcon" //переделается в массив UIImage
 
-    //FilterArray
-    var filterArray = [String]()
     
     //Search is empty
     var searchBarIsEmpty: Bool {
@@ -41,9 +41,7 @@ class SearchViewController: UIViewController  {
         super.viewDidLoad()
         createTable()
         setupsearchBar()
-        setupConstraints()
         view.addSubview(tableView)
-        
     }
 }
 
@@ -85,14 +83,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: indentifireMenu, for: indexPath)
         let menuText = menuArray[indexPath.row]
-        let imageView = imageArray
-        let ingredients = ingredientsArray[indexPath.row]
+        
+ 
+        let imageView = mealRecipes?.first?.image
+        let ingredients = mealRecipes?.first?.creditsText
         
         var content = cell.defaultContentConfiguration()
         content.text = menuText //устанавливаем навзвание блюда
-        content.secondaryText = ingredients // устанавливаем ингридиенты
-        content.image = UIImage(named: imageView) //устанавливаем изображение
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
+//        content.secondaryText = ingredients // устанавливаем ингридиенты
+//        content.image = UIImage(named: imageView ?? "AppIcon") //устанавливаем изображение
+//        content.imageProperties.cornerRadius = tableView.rowHeight / 2
         
         cell.contentConfiguration = content
         
@@ -101,8 +101,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
 //    Захват выбранной строки
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let numberMenu = indexPath.row
-        print(numberMenu)
+        
     }
     
     //удаление строк
@@ -118,13 +117,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//MARK: -  constaints
-extension SearchViewController {
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-        ])
-    }
-}
+
 
 
 

@@ -17,14 +17,15 @@ class FavoriteButton: UIButton {
     private var defaultColor: UIColor!
     var isFavorite: Bool?
     
-    init(iconPointSize: CGFloat = 35, withColor color: UIColor = .systemGray) {
+    init(iconPointSize: CGFloat = 35, withColor color: UIColor = .systemGray3) {
         super.init(frame: .zero)
         
         iconConfiguration = UIImage.SymbolConfiguration(pointSize: iconPointSize, weight: .medium, scale: .medium)
         let image = UIImage(systemName: "star.circle", withConfiguration: iconConfiguration)
         setImage(image, for: .normal)
         self.defaultColor = color
-        tintColor = .systemGreen
+        tintColor = .systemGray3
+        isFavorite = false
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +34,7 @@ class FavoriteButton: UIButton {
     
     func setActive() {
         setImage(UIImage(systemName: "star.circle.fill", withConfiguration: iconConfiguration), for: .normal)
-        tintColor = .systemRed
+        tintColor = .systemGreen
         isFavorite = true
     }
     

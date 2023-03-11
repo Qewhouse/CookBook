@@ -10,7 +10,7 @@ import UIKit
 class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
     let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
-    
+    var recipeID: Int?
     
     private let recipeImageView: UIImageView = {
        let imageView = UIImageView()
@@ -34,6 +34,11 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
     private lazy var favoriteButton: FavoriteButton = {
         let button = FavoriteButton()
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 2
+        button.layer.shadowOffset = .zero
+        button.layer.borderColor = UIColor.black.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,7 +71,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        
+        favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         addSubview(recipeImageView)
         addSubview(recipeLabel)
         addSubview(creatorImageView)
@@ -74,7 +79,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         addSubview(favoriteButton)
     }
     
-    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String) {
+    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String, recipeID: Int) {
         if let image = recipeImage {
             spinner.removeFromSuperview()
             recipeImageView.image = image
@@ -86,10 +91,10 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             addSubview(spinner)
             spinner.makeSpinner(recipeImageView)
         }
-    //    recipeImageView.image = UIImage(named: recipeImageName)
         recipeLabel.text = recipeName
         creatorImageView.image = UIImage(named: creatorImageName)
         creatorLabel.text = "By \(creatorName)"
+        self.recipeID = recipeID
     }
     
     func setConstraints() {
@@ -120,5 +125,18 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
+    }
+}
+
+extension RecentRecipeCollectionViewCell {
+    @objc func tappedFavoriteButton(_ button: FavoriteButton) {
+        if let recipeID = recipeID {
+            if button.isFavorite == false {
+                button.setActive()
+                print("Recipe ID is: \(recipeID)")
+            } else {
+                button.setInactive()
+            }
+        }
     }
 }

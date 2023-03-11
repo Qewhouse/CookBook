@@ -261,10 +261,11 @@ extension PopularViewController: UICollectionViewDataSource {
             return
         case .popularCategoryButton(_):
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
-                let meal = cell.button.titleLabel?.text
+                let meal = cell.mealButton.titleLabel?.text
+                
+//                cell.buttonTapped()
                 if let meal = meal {
                     fetchDataByMeal(meal)
-                    
                 }
             }
         case .popularCategory(_):
@@ -315,6 +316,11 @@ extension PopularViewController: UICollectionViewDataSource {
         case .popularCategoryButton(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(buttonName: buttonsName[indexPath.row])
+            cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
+            cell.layer.cornerRadius = 25
+            cell.layer.shadowRadius = 3.0
+            cell.layer.shadowOpacity = 1.0
+            cell.layer.shadowOffset = CGSize(width: 0, height: 10)
             return cell
         case .popularCategory(let category):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }

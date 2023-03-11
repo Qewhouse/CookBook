@@ -90,7 +90,6 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
                     let cancelAction = UIAlertAction(title: "OK", style: .default) { alertAction in
                         return
                     }
-                    
                     alert.addAction(cancelAction)
                     self.present(alert, animated: true)
                 }

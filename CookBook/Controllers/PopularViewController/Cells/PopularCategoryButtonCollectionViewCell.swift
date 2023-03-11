@@ -70,9 +70,11 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .system)
 //        button.backgroundColor = Theme.yellowColor
 //        button.tintColor = .gray
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        button.titleLabel?.numberOfLines = 1
+        button.titleLabel?.textAlignment = .center
+//        button.titleLabel?.minimumScaleFactor = .greatestFiniteMagnitude
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
 //        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
@@ -109,16 +111,15 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         mealButton.setTitleColor(UIColor.black, for: .normal)
     }
     
-    
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            mealButton.topAnchor.constraint(equalTo: topAnchor, constant: 40),
+            mealButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             mealButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             mealButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            mealButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
+            mealButton.bottomAnchor.constraint(equalTo: topAnchor, constant: -20),
+//            mealButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
-        
     }
 }

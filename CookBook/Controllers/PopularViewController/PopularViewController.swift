@@ -39,7 +39,6 @@ class PopularViewController: UIViewController {
         setDelegates()
     }
     
-    
     private func setupViews() {
 
         view.addSubview(collectionView)
@@ -156,7 +155,7 @@ extension PopularViewController {
                                                        subitems: [item])
 
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -167,13 +166,13 @@ extension PopularViewController {
     private func createPopularCategoryButtonSection() -> NSCollectionLayoutSection {
         
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(1)))
+                                                            heightDimension: .fractionalHeight(0.5)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.2),
                                                                          heightDimension: .fractionalHeight(0.1)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 5,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -190,7 +189,7 @@ extension PopularViewController {
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -207,7 +206,7 @@ extension PopularViewController {
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
-                                          behavior: .groupPaging,
+                                          behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
                                           supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
@@ -299,7 +298,7 @@ extension PopularViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(buttonName: buttonsName[indexPath.row])
             cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
-            cell.layer.cornerRadius = 25
+            cell.layer.cornerRadius = 10
             cell.layer.shadowRadius = 3.0
             cell.layer.shadowOpacity = 1.0
             cell.layer.shadowOffset = CGSize(width: 0, height: 10)
@@ -369,7 +368,6 @@ extension PopularViewController: UICollectionViewDataSource {
             
             return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

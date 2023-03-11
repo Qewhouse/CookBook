@@ -250,10 +250,11 @@ extension PopularViewController: UICollectionViewDataSource {
             
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
                 let meal = cell.mealButton.titleLabel?.text
-                cell.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
+                cell.backgroundColor = Theme.redColor.withAlphaComponent(0.2)
+                cell.mealButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .bold)
                 cell.layer.cornerRadius = 10
                 cell.layer.shadowRadius = 3.0
-                cell.layer.shadowColor = UIColor.systemBlue.cgColor
+                cell.layer.shadowColor = Theme.redColor.cgColor
                 cell.layer.shadowOpacity = 1.0
                 cell.layer.shadowOffset = CGSize(width: 0, height: 10)
                 
@@ -268,6 +269,32 @@ extension PopularViewController: UICollectionViewDataSource {
             return
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+            
+        case .trendingNow(_):
+            return
+        case .popularCategoryButton(_):
+            
+            
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
+                let meal = cell.mealButton.titleLabel?.text
+                cell.prepareForReuse()
+                
+//                cell.buttonTapped()
+                if let meal = meal {
+                    fetchDataByMeal(meal)
+                }
+            }
+        case .popularCategory(_):
+            return
+        case .recentRecipe(_):
+            return
+        }
+    }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
@@ -307,11 +334,12 @@ extension PopularViewController: UICollectionViewDataSource {
         case .popularCategoryButton(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(buttonName: buttonsName[indexPath.row])
-            cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
-            cell.layer.cornerRadius = 10
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.shadowOffset = CGSize(width: 0, height: 10)
+            cell.prepareForReuse()
+//            cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
+//            cell.layer.cornerRadius = 10
+//            cell.layer.shadowRadius = 3.0
+//            cell.layer.shadowOpacity = 1.0
+//            cell.layer.shadowOffset = CGSize(width: 0, height: 10)
             return cell
         case .popularCategory(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }

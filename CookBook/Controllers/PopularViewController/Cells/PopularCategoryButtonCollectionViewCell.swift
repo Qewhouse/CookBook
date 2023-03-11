@@ -66,12 +66,15 @@ import UIKit
 
 class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     
-    lazy var button: UIButton = {
+    lazy var mealButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .gray
+//        button.backgroundColor = Theme.yellowColor
+//        button.tintColor = .gray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -85,32 +88,35 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    @objc private func buttonTapped() {
-//        backgroundColor = .none
-//        _ = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-    }
-    
+        
 //    @objc func updateUI() {
 //        backgroundColor = Theme.yellowColor
 //    }
     
     func setupView() {
-        addSubview(button)
+        addSubview(mealButton)
     }
     
     func configureCell(buttonName: String) {
-        button.setTitle(buttonName, for: .normal)
+        mealButton.setTitle(buttonName, for: .normal)
+    }
+   
+    func buttonTapped() {
+        mealButton.setTitleColor(UIColor.systemOrange, for: .normal)
+    }
+    
+    func deselectButton() {
+        mealButton.setTitleColor(UIColor.black, for: .normal)
     }
     
     
     func setConstraints() {
         
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor, constant: 40),
-            button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            button.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
+            mealButton.topAnchor.constraint(equalTo: topAnchor, constant: 40),
+            mealButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            mealButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            mealButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
             
         ])
         

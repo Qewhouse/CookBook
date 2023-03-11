@@ -191,7 +191,7 @@ extension PopularViewController {
         let section = createLayoutSection(group: group,
                                           behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
-                                          supplementaryItems: [supplementaryHeaderItem()],
+                                          supplementaryItems: [],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
         return section

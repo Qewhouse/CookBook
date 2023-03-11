@@ -38,9 +38,9 @@ class FavoriteManager: FavoriteManagerProtocol {
                 case .success(let data):
                     recipeData = data
                     var favoriteIDList = self.defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
-                    print(favoriteIDList)
                     favoriteIDList.append(recipeID)
                     self.defaults.set(favoriteIDList, forKey: "favoriteList")
+                    print(favoriteIDList)
                     completionBlock(.success(true))
                 case .failure(let error):
                     completionBlock(.failure(error))
@@ -72,6 +72,7 @@ class FavoriteManager: FavoriteManagerProtocol {
         if let index = favoriteIDList.firstIndex(of: recipeID) {
             favoriteIDList.remove(at: index)
             defaults.set(favoriteIDList, forKey: "favoriteList")
+            print(favoriteIDList)
             completionBlock(.success(true))
             
         }

@@ -45,23 +45,11 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private let byLabel: UILabel = {
+
+    private let readyInMinutesLabel: UILabel = {
        let label = UILabel()
-        label.text = "by"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let creatorLabel: UILabel = {
-       let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -69,7 +57,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
         setConstraints()
     }
@@ -83,13 +70,12 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         
         addSubview(view)
         view.addSubview(popularCategoryLabel)
-        view.addSubview(byLabel)
-        view.addSubview(creatorLabel)
+        view.addSubview(readyInMinutesLabel)
         addSubview(backImageView)
         backImageView.addSubview(popularCategoryImageView)
     }
     
-    func configureCell(image: UIImage?, recipeName: String, creatorName: String, recipeID: Int) {
+    func configureCell(image: UIImage?, recipeName: String, readyInMinutes: Int, recipeID: Int) {
         if let image = image {
             spinner.removeFromSuperview()
             popularCategoryImageView.image = image
@@ -102,7 +88,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             spinner.makeSpinner(popularCategoryImageView)
         }
         popularCategoryLabel.text = recipeName
-        creatorLabel.text = creatorName
+        readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         self.recipeID = recipeID
     }
     
@@ -112,31 +98,27 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             view.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             backImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            backImageView.widthAnchor.constraint(equalToConstant: 100),
-            backImageView.heightAnchor.constraint(equalToConstant: 100),
+            backImageView.widthAnchor.constraint(equalToConstant: 120),
+            backImageView.heightAnchor.constraint(equalToConstant: 120),
             
             popularCategoryImageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 0),
             popularCategoryImageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor, constant: 0),
             popularCategoryImageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: 0),
             popularCategoryImageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 0),
             
-            popularCategoryLabel.topAnchor.constraint(equalTo: popularCategoryImageView.bottomAnchor, constant: 10),
-            popularCategoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            popularCategoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            popularCategoryLabel.bottomAnchor.constraint(equalTo: byLabel.topAnchor, constant: -5),
+            readyInMinutesLabel.topAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 10),
+            readyInMinutesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            readyInMinutesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            readyInMinutesLabel.heightAnchor.constraint(equalToConstant: 15),
+            readyInMinutesLabel.bottomAnchor.constraint(equalTo: popularCategoryLabel.topAnchor, constant: -5),
             
-            byLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            byLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            byLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            byLabel.bottomAnchor.constraint(equalTo: creatorLabel.topAnchor, constant: -5),
-            
-            creatorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            creatorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            creatorLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+            popularCategoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            popularCategoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            popularCategoryLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
         ])
     }
 }

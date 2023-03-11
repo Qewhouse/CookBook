@@ -5,7 +5,6 @@
 //  Created by Sergey on 08.03.2023.
 //
 
-import Foundation
 import UIKit
 
 protocol FavoriteButtonDelegate: AnyObject {

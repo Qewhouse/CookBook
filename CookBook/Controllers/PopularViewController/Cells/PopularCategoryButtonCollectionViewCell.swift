@@ -70,7 +70,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .system)
 //        button.backgroundColor = Theme.yellowColor
 //        button.tintColor = .gray
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.titleLabel?.numberOfLines = 1
         button.titleLabel?.textAlignment = .center
 //        button.titleLabel?.minimumScaleFactor = .greatestFiniteMagnitude
@@ -90,10 +90,30 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        setDefaults()
+//    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setDefaults()
+    }
         
 //    @objc func updateUI() {
 //        backgroundColor = Theme.yellowColor
 //    }
+    
+    func setDefaults() {
+        backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
+        mealButton.titleLabel?.font = .systemFont(ofSize: 13)
+        layer.cornerRadius = 10
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1.0
+        layer.shadowOffset = CGSize(width: 0, height: 10)
+        layer.shadowColor = UIColor.systemGray.cgColor
+    }
     
     func setupView() {
         addSubview(mealButton)

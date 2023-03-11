@@ -85,6 +85,9 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         }
         trendingLabel.text = recipeName
         readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
+        if favoriteManager.checkForFavorite(recipeID: recipeID) {
+            favoriteButton.setActive()
+        }
         self.recipeID = recipeID
     }
     
@@ -124,16 +127,27 @@ extension TrendingCollectionViewCell {
                 print("Recipe ID is: \(recipeID)")
                 let image = trendingImageView.image?.pngData()
                 favoriteManager.addToFavorite(recipeID: recipeID, recipeImage: image) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            button.setActive()
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                  
+                }
+                
+            } else {
+                favoriteManager.deleteFromFavorite(recipeID: recipeID) { result in
                     switch result {
                     case .success(_):
-                        button.setActive()
+                        button.setInactive()
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
                 }
-                
-            } else {
-                button.setInactive()
+               
             }
         }
     }

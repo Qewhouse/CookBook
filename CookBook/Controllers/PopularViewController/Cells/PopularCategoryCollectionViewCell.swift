@@ -9,6 +9,7 @@ import UIKit
 
 class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
+    let favoriteManager = FavoriteManager()
     let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
     var recipeID: Int?
     
@@ -24,6 +25,17 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
       let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var favoriteButton: FavoriteButton = {
+        let button = FavoriteButton(iconPointSize: 30)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 2
+        button.layer.shadowOffset = .zero
+        button.layer.borderColor = UIColor.black.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let popularCategoryImageView: UIImageView = {
@@ -66,13 +78,15 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
+//        translatesAutoresizingMaskIntoConstraints = false
+        favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         
         addSubview(view)
         view.addSubview(popularCategoryLabel)
         view.addSubview(readyInMinutesLabel)
         addSubview(backImageView)
         backImageView.addSubview(popularCategoryImageView)
+        view.addSubview(favoriteButton)
     }
     
     func configureCell(image: UIImage?, recipeName: String, readyInMinutes: Int, recipeID: Int) {
@@ -89,6 +103,9 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         }
         popularCategoryLabel.text = recipeName
         readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
+        if favoriteManager.checkForFavorite(recipeID: recipeID) {
+            favoriteButton.setActive()
+        }
         self.recipeID = recipeID
     }
     
@@ -99,6 +116,11 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5),
+            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 80),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor),
             
             backImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -120,5 +142,39 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             popularCategoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             popularCategoryLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
         ])
+    }
+}
+
+extension PopularCategoryCollectionViewCell {
+    @objc func tappedFavoriteButton(_ button: FavoriteButton) {
+        if let recipeID = recipeID {
+            if button.isFavorite == false {
+               
+                print("Recipe ID is: \(recipeID)")
+                let image = popularCategoryImageView.image?.pngData()
+                favoriteManager.addToFavorite(recipeID: recipeID, recipeImage: image) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            button.setActive()
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                  
+                }
+                
+            } else {
+                favoriteManager.deleteFromFavorite(recipeID: recipeID) { result in
+                    switch result {
+                    case .success(_):
+                        button.setInactive()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+               
+            }
+        }
     }
 }

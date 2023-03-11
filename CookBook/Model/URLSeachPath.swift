@@ -12,5 +12,5 @@ enum SearchPath: String {
     case random = "/recipes/random"
     case findByNutrients = "/recipes/findByNutrients"
     case findByIngredients = "/recipes/findByIngredients"
-    case findByID = "recipes/informationBulk"
+    case findByID = "/recipes/informationBulk"
 }

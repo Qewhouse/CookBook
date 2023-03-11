@@ -28,31 +28,29 @@ class FavoriteManager: FavoriteManagerProtocol {
     func addToFavorite(recipeID: Int, recipeImage: Data?, completionBlock: @escaping (Result<Bool, Error>) -> Void) {
         
         var recipeData: Data?
-        let recipeID = recipeID
         if checkForFavorite(recipeID: recipeID) == true {
             completionBlock(.failure(FavoriteError.favoriteExist))
         } else {
             
-            networkManager.fetchRecipeByID(.searchByID(recipeID: recipeID)) { result in
+            networkManager.fetchRecipeByID(.searchByID(recipeID: recipeID)) { [weak self]result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let data):
                     recipeData = data
+                    var favoriteIDList = self.defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+                    favoriteIDList.append(recipeID)
+                    self.defaults.set(favoriteIDList, forKey: "favoriteList")
+                    print(favoriteIDList)
+                    completionBlock(.success(true))
                 case .failure(let error):
                     completionBlock(.failure(error))
                 }
             }
             
-            
-            if let recipeData = recipeData {
-                
-                // Здесь мы записываем данные (recipeData а так же recipeImage ) в базу, а так же и в UserDefaults и возвращаем результат сохранения в completionBlock
-                
-            }
+
             
             
-            var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
-            favoriteIDList.append(recipeID)
-            defaults.set(favoriteIDList, forKey: "favoriteList")
+            
             
             
         }
@@ -74,6 +72,8 @@ class FavoriteManager: FavoriteManagerProtocol {
         if let index = favoriteIDList.firstIndex(of: recipeID) {
             favoriteIDList.remove(at: index)
             defaults.set(favoriteIDList, forKey: "favoriteList")
+            print(favoriteIDList)
+            completionBlock(.success(true))
             
         }
         
@@ -136,5 +136,7 @@ class FavoriteManager: FavoriteManagerProtocol {
           return false
         }
     }
+    
+    //
 
 }

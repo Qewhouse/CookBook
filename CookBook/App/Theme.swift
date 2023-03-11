@@ -26,4 +26,9 @@ enum Theme {
     static let spacing: CGFloat = 20
     static let leftOffset: CGFloat = 20
     static let topOffset: CGFloat = 10
+    
+    //MARK: - Count of recipes
+    
+    static let countOfRecipes: Int = 4
+    
 }

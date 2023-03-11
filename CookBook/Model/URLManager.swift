@@ -42,6 +42,16 @@ struct FilterParam {
 
 extension ApiURL {
     
+    static func searchByID(recipeID: Int) -> ApiURL {
+        
+        let url = ApiURL(path: SearchPath.findByID.rawValue, urlQueryItems: [
+            URLQueryItem(name: "apiKey", value: Secrets.apiKey.rawValue),
+            URLQueryItem(name: "ids", value: String(recipeID)),
+        ])
+        return url
+        
+    }
+    
     static func randomSearch(number: Int, tags: [String] = [] ) -> ApiURL {
         var tagsString: String = ""
         for string in tags {

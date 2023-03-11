@@ -28,7 +28,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     
     private let popularCategoryImageView: UIImageView = {
        let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = Theme.imageCornerRadius
         imageView.translatesAutoresizingMaskIntoConstraints = false

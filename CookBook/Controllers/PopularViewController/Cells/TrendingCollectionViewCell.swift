@@ -133,6 +133,15 @@ extension TrendingCollectionViewCell {
                 }
                 
             } else {
+                favoriteManager.deleteFromFavorite(recipeID: recipeID) { result in
+                    switch result {
+                        
+                    case .success(_):
+                        <#code#>
+                    case .failure(_):
+                        <#code#>
+                    }
+                }
                 button.setInactive()
             }
         }

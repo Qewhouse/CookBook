@@ -110,6 +110,8 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         if favoriteManager.checkForFavorite(recipeID: recipeID) {
             favoriteButton.setActive()
+        } else {
+            favoriteButton.setInactive()
         }
         self.recipeID = recipeID
     }

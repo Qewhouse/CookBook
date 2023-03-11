@@ -198,7 +198,7 @@ extension PopularViewController {
         let section = createLayoutSection(group: group,
                                           behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
-                                          supplementaryItems: [],
+                                          supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
         return section
@@ -296,10 +296,11 @@ extension PopularViewController: UICollectionViewDataSource {
         switch sections[indexPath.section] {
             
         case .trendingNow(_):
-            return
+            if let cell = collectionView.cellForItem(at: indexPath) as? TrendingCollectionViewCell {
+                cell.prepareForReuse()
+            }
+                
         case .popularCategoryButton(_):
-            
-            
             
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
                 let meal = cell.mealButton.titleLabel?.text
@@ -311,9 +312,14 @@ extension PopularViewController: UICollectionViewDataSource {
                 }
             }
         case .popularCategory(_):
-            return
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCollectionViewCell {
+                cell.prepareForReuse()
+            }
+            
         case .recentRecipe(_):
-            return
+            if let cell = collectionView.cellForItem(at: indexPath) as? RecentRecipeCollectionViewCell {
+                cell.prepareForReuse()
+            }
         }
     }
     

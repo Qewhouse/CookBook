@@ -23,6 +23,7 @@ class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
     private var sourceUrl: URL?
     private var index: IndexPath!
     
+    private var favoriteManager = FavoriteManager()
     private var networkManager = NetworkManager()
     
     
@@ -77,11 +78,35 @@ class RecipeDetailViewController: CustomViewController<RecipeDetailView> {
 
 extension RecipeDetailViewController: DetailViewDelegate {
     func detailView(didTapFavoriteButton button: FavoriteButton) {
+        let recipeID = recipeData.id
         if button.isFavorite == false {
-            button.setActive()
+            
+            print("Recipe ID is: \(recipeID)")
+            let image = customView.backgroundImageView.image?.pngData()
+            favoriteManager.addToFavorite(recipeID: recipeID, recipeImage: image) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        button.setActive()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
+            }
+            
         } else {
-            button.setInactive()
+            favoriteManager.deleteFromFavorite(recipeID: recipeID) { result in
+                switch result {
+                case .success(_):
+                    button.setInactive()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
         }
+        
     }
     
     func detailView(didTapBackButton button: UIButton) {
@@ -169,6 +194,9 @@ private extension RecipeDetailViewController {
         populateTags(with: recipeData)
         populateIngredientInfo(with: recipeData.extendedIngredients)
         populatePreparationInfo(with: recipeData.analyzedInstructions)
+        if favoriteManager.checkForFavorite(recipeID: recipeData.id) {
+            customView.favoriteButton.setActive()
+        }
     }
     
     func populateTags(with recipe: Recipe) {

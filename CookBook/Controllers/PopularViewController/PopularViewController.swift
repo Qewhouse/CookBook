@@ -238,7 +238,11 @@ extension PopularViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        randomRecipes?.count ?? 10
+        switch section {
+            
+      
+        }
+//        randomRecipes?.count ?? 10
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {

@@ -63,6 +63,11 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        favoriteButton.setInactive()
+    }
+    
     func setupView() {
         favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         addSubview(trendingImageView)
@@ -87,6 +92,8 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         if favoriteManager.checkForFavorite(recipeID: recipeID) {
             favoriteButton.setActive()
+        } else {
+            favoriteButton.setInactive()
         }
         self.recipeID = recipeID
     }
@@ -135,7 +142,6 @@ extension TrendingCollectionViewCell {
                             print(error.localizedDescription)
                         }
                     }
-                  
                 }
                 
             } else {
@@ -147,7 +153,6 @@ extension TrendingCollectionViewCell {
                         print(error.localizedDescription)
                     }
                 }
-               
             }
         }
     }

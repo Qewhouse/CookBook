@@ -198,7 +198,7 @@ extension PopularViewController {
         let section = createLayoutSection(group: group,
                                           behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
-                                          supplementaryItems: [],
+                                          supplementaryItems: [supplementaryHeaderItem()],
                                           contentInsets: false)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
         return section
@@ -296,10 +296,11 @@ extension PopularViewController: UICollectionViewDataSource {
         switch sections[indexPath.section] {
             
         case .trendingNow(_):
-            return
+            if let cell = collectionView.cellForItem(at: indexPath) as? TrendingCollectionViewCell {
+                cell.prepareForReuse()
+            }
+                
         case .popularCategoryButton(_):
-            
-            
             
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
                 let meal = cell.mealButton.titleLabel?.text
@@ -311,8 +312,14 @@ extension PopularViewController: UICollectionViewDataSource {
                 }
             }
         case .popularCategory(_):
-            return
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCollectionViewCell {
+                cell.prepareForReuse()
+            }
+            
         case .recentRecipe(_):
+//            if let cell = collectionView.cellForItem(at: indexPath) as? RecentRecipeCollectionViewCell {
+//                cell.prepareForReuse()
+//            }
             return
         }
     }
@@ -334,6 +341,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: hourRecipe[indexPath.row].title,
                                                    readyInMinutes: hourRecipe[indexPath.row].readyInMinutes,
                                                    recipeID: hourRecipe[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }
@@ -376,6 +384,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: mealRecipes[indexPath.row].title,
                                                    readyInMinutes: mealRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: mealRecipes[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }
@@ -397,6 +406,7 @@ extension PopularViewController: UICollectionViewDataSource {
             return cell
         case .recentRecipe(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
+            cell.prepareForReuse()
             if let randomRecipes = randomRecipes {
                 //Метод получения картинки по сведениям из модели
                 if let imageName = randomRecipes[indexPath.row].image {
@@ -408,6 +418,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: randomRecipes[indexPath.row].title,
                                                    readyInMinutes: randomRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: randomRecipes[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }

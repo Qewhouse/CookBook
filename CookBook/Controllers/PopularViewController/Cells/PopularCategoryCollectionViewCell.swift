@@ -77,6 +77,11 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        favoriteButton.setInactive()
+    }
+    
     func setupView() {
 //        translatesAutoresizingMaskIntoConstraints = false
         favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
@@ -105,6 +110,8 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         if favoriteManager.checkForFavorite(recipeID: recipeID) {
             favoriteButton.setActive()
+        } else {
+            favoriteButton.setInactive()
         }
         self.recipeID = recipeID
     }

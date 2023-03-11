@@ -64,6 +64,11 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        favoriteButton.setInactive()
+    }
+    
     func setupView() {
         favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         addSubview(recipeImageView)
@@ -132,7 +137,6 @@ extension RecentRecipeCollectionViewCell {
                             print(error.localizedDescription)
                         }
                     }
-                  
                 }
                 
             } else {
@@ -144,7 +148,6 @@ extension RecentRecipeCollectionViewCell {
                         print(error.localizedDescription)
                     }
                 }
-               
             }
         }
     }

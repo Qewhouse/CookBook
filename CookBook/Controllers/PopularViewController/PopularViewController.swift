@@ -16,7 +16,7 @@ class PopularViewController: UIViewController {
     let buttonsName = MealType.mealArray
     
     private let collectionView: UICollectionView = {
-       let collectionViewLayout = UICollectionViewLayout()
+        let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .none
         collectionView.showsVerticalScrollIndicator = false
@@ -26,7 +26,7 @@ class PopularViewController: UIViewController {
     }()
     
     private let sections = MockData.shared.pageData
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = MealTime.getMealTime()[0]
@@ -39,8 +39,13 @@ class PopularViewController: UIViewController {
         setDelegates()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setupViews() {
-
+        
         view.addSubview(collectionView)
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCollectionViewCell")
         collectionView.register(PopularCategoryButtonCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCategoryButtonCollectionViewCell")
@@ -59,7 +64,7 @@ class PopularViewController: UIViewController {
 //MARK: - Create Layout
 
 extension PopularViewController {
-// Метод получения рецептов по тегам - meal, количество получаемых рецептов - number
+    // Метод получения рецептов по тегам - meal, количество получаемых рецептов - number
     
     func fetchDataByTime() {
         let time = MealTime.getMealTime()[1]
@@ -97,7 +102,7 @@ extension PopularViewController {
         }
     }
     
-// Метод получения случайных рецептов. Количество - number
+    // Метод получения случайных рецептов. Количество - number
     func fetchRandomData() {
         networkManager.fetchRecipes(.randomSearch(number: Theme.countOfRecipes)) { result in
             DispatchQueue.main.async {
@@ -106,7 +111,7 @@ extension PopularViewController {
                     if let recipes = data.recipes {
                         // сюда приходит массив случайных рецептов
                         self.randomRecipes = recipes
-                        
+                        self.collectionView.reloadSections(IndexSet(integer: 3))
                     }
                 case .failure(let error):
                     self.showErrorAlert(error: error)
@@ -120,7 +125,7 @@ extension PopularViewController {
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
             guard let self = self else { return nil }
             let section = self.sections[sectionIndex]
-
+            
             switch section {
             case .trendingNow(_):
                 
@@ -155,7 +160,7 @@ extension PopularViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9),
                                                                          heightDimension: .fractionalHeight(0.5)),
                                                        subitems: [item])
-
+        
         let section = createLayoutSection(group: group,
                                           behavior: .continuousGroupLeadingBoundary,
                                           interGroupSpacing: 20,
@@ -238,16 +243,28 @@ extension PopularViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        randomRecipes?.count ?? 10
+        switch section {
+        case 0:
+            return Theme.countOfRecipes
+        case 1:
+            return 16
+        case 2:
+            return Theme.countOfRecipes
+        case 3:
+            return Theme.countOfRecipes
+        default:
+            return 4
+        }
+        //        randomRecipes?.count ?? 10
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
             
         case .trendingNow(_):
-            return
+            if let recipes = hourRecipe {
+                present(RecipeDetailViewController(with: recipes[indexPath.row], index: indexPath), animated: true)
+            }
         case .popularCategoryButton(_):
-            
-            
             
             if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryButtonCollectionViewCell {
                 let meal = cell.mealButton.titleLabel?.text
@@ -259,15 +276,19 @@ extension PopularViewController: UICollectionViewDataSource {
                 cell.layer.shadowOpacity = 1.0
                 cell.layer.shadowOffset = CGSize(width: 0, height: 10)
                 
-//                cell.buttonTapped()
+                //                cell.buttonTapped()
                 if let meal = meal {
                     fetchDataByMeal(meal)
                 }
             }
         case .popularCategory(_):
-            return
+            if let recipes = mealRecipes {
+                present(RecipeDetailViewController(with: recipes[indexPath.row], index: indexPath), animated: true)
+            }
         case .recentRecipe(_):
-            return
+            if let recipes = randomRecipes {
+                present(RecipeDetailViewController(with: recipes[indexPath.row], index: indexPath), animated: true)
+            }
         }
     }
     
@@ -284,7 +305,7 @@ extension PopularViewController: UICollectionViewDataSource {
                 let meal = cell.mealButton.titleLabel?.text
                 cell.prepareForReuse()
                 
-//                cell.buttonTapped()
+                //                cell.buttonTapped()
                 if let meal = meal {
                     fetchDataByMeal(meal)
                 }
@@ -295,7 +316,7 @@ extension PopularViewController: UICollectionViewDataSource {
             return
         }
     }
-
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
@@ -336,11 +357,11 @@ extension PopularViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryButtonCollectionViewCell", for: indexPath) as? PopularCategoryButtonCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(buttonName: buttonsName[indexPath.row])
             cell.prepareForReuse()
-//            cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
-//            cell.layer.cornerRadius = 10
-//            cell.layer.shadowRadius = 3.0
-//            cell.layer.shadowOpacity = 1.0
-//            cell.layer.shadowOffset = CGSize(width: 0, height: 10)
+            //            cell.backgroundColor = UIColor.systemGray4.withAlphaComponent(0.2)
+            //            cell.layer.cornerRadius = 10
+            //            cell.layer.shadowRadius = 3.0
+            //            cell.layer.shadowOpacity = 1.0
+            //            cell.layer.shadowOffset = CGSize(width: 0, height: 10)
             return cell
         case .popularCategory(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCategoryCollectionViewCell", for: indexPath) as? PopularCategoryCollectionViewCell else { return UICollectionViewCell() }

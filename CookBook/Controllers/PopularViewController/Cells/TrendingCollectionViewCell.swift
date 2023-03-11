@@ -41,18 +41,11 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private let creatorImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private let creatorLabel: UILabel = {
+
+    private let readyInMinutesLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -73,12 +66,11 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         addSubview(trendingImageView)
         addSubview(trendingLabel)
-        addSubview(creatorImageView)
-        addSubview(creatorLabel)
+        addSubview(readyInMinutesLabel)
         addSubview(favoriteButton)
     }
     
-    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String, recipeID: Int) {
+    func configureCell(recipeImage: UIImage?, recipeName: String, readyInMinutes: Int, recipeID: Int) {
         if let image = recipeImage {
             spinner.removeFromSuperview()
             trendingImageView.image = image
@@ -91,8 +83,7 @@ class TrendingCollectionViewCell: UICollectionViewCell {
             spinner.makeSpinner(trendingImageView)
         }
         trendingLabel.text = recipeName
-        creatorImageView.image = UIImage(named: creatorImageName)
-        creatorLabel.text = "By \(creatorName)"
+        readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         self.recipeID = recipeID
     }
     
@@ -108,21 +99,18 @@ class TrendingCollectionViewCell: UICollectionViewCell {
             trendingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             trendingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             trendingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            trendingImageView.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -10),
+            trendingImageView.bottomAnchor.constraint(equalTo: readyInMinutesLabel.topAnchor, constant: -10),
             
-            trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            readyInMinutesLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            readyInMinutesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            readyInMinutesLabel.heightAnchor.constraint(equalToConstant: 15),
+            readyInMinutesLabel.bottomAnchor.constraint(equalTo: trendingLabel.topAnchor, constant: -10),
+            
+            trendingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            trendingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             trendingLabel.heightAnchor.constraint(equalToConstant: 15),
-            trendingLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
+            trendingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
             
-            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            creatorImageView.heightAnchor.constraint(equalToConstant: 40),
-            creatorImageView.widthAnchor.constraint(equalToConstant: 40),
-            
-            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
-            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
         ])
     }
 }

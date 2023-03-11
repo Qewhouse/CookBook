@@ -88,8 +88,10 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+        
+//    @objc func updateUI() {
+//        backgroundColor = Theme.yellowColor
+//    }
     
     func setupView() {
         addSubview(mealButton)
@@ -98,7 +100,7 @@ class PopularCategoryButtonCollectionViewCell: UICollectionViewCell {
     func configureCell(buttonName: String) {
         mealButton.setTitle(buttonName, for: .normal)
     }
-    
+   
     func buttonTapped() {
         mealButton.setTitleColor(UIColor.systemOrange, for: .normal)
     }

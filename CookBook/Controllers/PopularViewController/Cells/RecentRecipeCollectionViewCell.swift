@@ -42,18 +42,11 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private let creatorImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private let creatorLabel: UILabel = {
+
+    private let readyInMinutesLabel: UILabel = {
        let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,12 +67,11 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         favoriteButton.addTarget(self, action: #selector(tappedFavoriteButton), for: .touchUpInside)
         addSubview(recipeImageView)
         addSubview(recipeLabel)
-        addSubview(creatorImageView)
-        addSubview(creatorLabel)
+        addSubview(readyInMinutesLabel)
         addSubview(favoriteButton)
     }
     
-    func configureCell(recipeImage: UIImage?, recipeName: String, creatorImageName: String, creatorName: String, recipeID: Int) {
+    func configureCell(recipeImage: UIImage?, recipeName: String, readyInMinutes: Int, recipeID: Int) {
         if let image = recipeImage {
             spinner.removeFromSuperview()
             recipeImageView.image = image
@@ -92,8 +84,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             spinner.makeSpinner(recipeImageView)
         }
         recipeLabel.text = recipeName
-        creatorImageView.image = UIImage(named: creatorImageName)
-        creatorLabel.text = "By \(creatorName)"
+        readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
         self.recipeID = recipeID
     }
     
@@ -109,21 +100,17 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
             recipeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            recipeImageView.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: -10),
+            recipeImageView.bottomAnchor.constraint(equalTo: readyInMinutesLabel.topAnchor, constant: -10),
             
-            recipeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            recipeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            readyInMinutesLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            readyInMinutesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            readyInMinutesLabel.heightAnchor.constraint(equalToConstant: 15),
+            readyInMinutesLabel.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: -5),
+            
+            recipeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            recipeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             recipeLabel.heightAnchor.constraint(equalToConstant: 40),
-            recipeLabel.bottomAnchor.constraint(equalTo: creatorImageView.topAnchor, constant: -10),
-            
-            creatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            creatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            creatorImageView.heightAnchor.constraint(equalToConstant: 25),
-            creatorImageView.widthAnchor.constraint(equalToConstant: 25),
-            
-            creatorLabel.leadingAnchor.constraint(equalTo: creatorImageView.trailingAnchor, constant: 10),
-            creatorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            creatorLabel.centerYAnchor.constraint(equalTo: creatorImageView.centerYAnchor)
+            recipeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }

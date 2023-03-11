@@ -137,7 +137,6 @@ extension RecentRecipeCollectionViewCell {
                             print(error.localizedDescription)
                         }
                     }
-                  
                 }
                 
             } else {
@@ -149,7 +148,6 @@ extension RecentRecipeCollectionViewCell {
                         print(error.localizedDescription)
                     }
                 }
-               
             }
         }
     }

@@ -341,6 +341,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: hourRecipe[indexPath.row].title,
                                                    readyInMinutes: hourRecipe[indexPath.row].readyInMinutes,
                                                    recipeID: hourRecipe[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }
@@ -383,6 +384,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: mealRecipes[indexPath.row].title,
                                                    readyInMinutes: mealRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: mealRecipes[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }
@@ -404,6 +406,7 @@ extension PopularViewController: UICollectionViewDataSource {
             return cell
         case .recentRecipe(_):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentRecipeCollectionViewCell", for: indexPath) as? RecentRecipeCollectionViewCell else { return UICollectionViewCell() }
+            cell.prepareForReuse()
             if let randomRecipes = randomRecipes {
                 //Метод получения картинки по сведениям из модели
                 if let imageName = randomRecipes[indexPath.row].image {
@@ -415,6 +418,7 @@ extension PopularViewController: UICollectionViewDataSource {
                                                    recipeName: randomRecipes[indexPath.row].title,
                                                    readyInMinutes: randomRecipes[indexPath.row].readyInMinutes,
                                                    recipeID: randomRecipes[indexPath.row].id)
+//                                cell.prepareForReuse()
                             case .failure(let error):
                                 self.showErrorAlert(error: error)
                             }

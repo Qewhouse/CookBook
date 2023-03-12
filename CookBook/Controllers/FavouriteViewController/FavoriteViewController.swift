@@ -27,21 +27,34 @@ class FavoriteViewController: UIViewController {
     let networkManager = NetworkManager()
     let favoriteManager = FavoriteManager()
     var recipes: [Recipe] = []
+    
+    private let backGround: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Chef-PNG-Cutout")
+//        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(backGround)
+        setBackground()
         fetchFavouriteRecipes()
         createTable()
         setupNavigationDar()
         setupConstraints()
         view.addSubview(tableView)
         
+        
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-
+        
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.medium
         loadingIndicator.startAnimating();
-
+//        setBackground()
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
         
@@ -51,16 +64,18 @@ class FavoriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFavouriteRecipes()
-//        setBackground()
+        setBackground()
+        self.view.layoutIfNeeded()
     }
     
-//    func setBackground() {
-//        if tableView.visibleCells.isEmpty {
-//            tableView.backgroundColor = Theme.redColor
-//                } else {
-//                    tableView.backgroundColor = Theme.yellowColor
-//                }
-//    }
+    func setBackground() {
+        if tableView.visibleCells.isEmpty {
+            tableView.backgroundColor = .clear
+        } else {
+//            view.backgroundColor = Theme.appColor
+            tableView.backgroundColor = Theme.appColor
+        }
+    }
     
     internal func dismissAlert() {
         if let vc = self.presentedViewController, vc is UIAlertController {
@@ -68,7 +83,7 @@ class FavoriteViewController: UIViewController {
         }
     }
     
-
+    
     
 }
 //MARK: - TableView
@@ -77,12 +92,13 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     //создание TableView
     func createTable() {
         view.addSubview(tableView)
-        tableView = UITableView(frame: view.bounds, style: .grouped)
+//        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(FavouritesTableViewCell.self, forCellReuseIdentifier: FavouritesTableViewCell.reuseId)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.rowHeight = 100
+        tableView.reloadData()
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     //установка количество строк
@@ -146,7 +162,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-
+    
 }
 //MARK: - настройка NavigationBar
 
@@ -166,6 +182,15 @@ extension FavoriteViewController {
 extension FavoriteViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            backGround.heightAnchor.constraint(equalToConstant: 300),
+            backGround.widthAnchor.constraint(equalToConstant: 300),
+            backGround.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backGround.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

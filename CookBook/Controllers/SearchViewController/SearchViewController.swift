@@ -131,7 +131,6 @@ extension SearchViewController {
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
-    // Presents searched recipes
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         let text = searchBar.text ?? ""
@@ -139,13 +138,13 @@ extension SearchViewController: UISearchBarDelegate {
         
     }
     
-    // Presents default recipes
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Updates the table view only if the text field is empty and default recipes don't already present.
+      
         if let text = searchBar.text, text.isEmpty && isSearching {
             tableView?.reloadData()
             let topRow = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topRow, at: .top, animated: false)
+            
         }
     }
     

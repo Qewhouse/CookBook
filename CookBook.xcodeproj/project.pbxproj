@@ -60,6 +60,7 @@
 		A598C63429B5001A00CA071C /* SpinnerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598C63329B5001A00CA071C /* SpinnerSetup.swift */; };
 		A5A5826929BD1CDE00C4A198 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5826829BD1CDE00C4A198 /* RecipeTableViewCell.swift */; };
 		A5A5827029BD32F500C4A198 /* FilterProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5826F29BD32F500C4A198 /* FilterProperty.swift */; };
+		A5A5827329BDA79A00C4A198 /* FavouritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5827229BDA79A00C4A198 /* FavouritesTableViewCell.swift */; };
 		A5B92A7C29B86CBA001A9554 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B92A7B29B86CBA001A9554 /* FavoriteButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,7 @@
 		A598C63329B5001A00CA071C /* SpinnerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerSetup.swift; sourceTree = "<group>"; };
 		A5A5826829BD1CDE00C4A198 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		A5A5826F29BD32F500C4A198 /* FilterProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterProperty.swift; sourceTree = "<group>"; };
+		A5A5827229BDA79A00C4A198 /* FavouritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewCell.swift; sourceTree = "<group>"; };
 		A5B92A7B29B86CBA001A9554 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		D466C558EDECDA6D2526FE68 /* Pods-CookBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookBook.debug.xcconfig"; path = "Target Support Files/Pods-CookBook/Pods-CookBook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +206,7 @@
 		372C270B29AB8A86009AFF7B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5826829BD1CDE00C4A198 /* RecipeTableViewCell.swift */,
 				372C270329AB857F009AFF7B /* UIViewController+Utilities.swift */,
 				A57D6B3D29B27E3500D67DC6 /* StringProtocol.swift */,
 			);
@@ -213,11 +216,11 @@
 		372C270C29AB8B2C009AFF7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A580E6A829BD18BA00A40F70 /* SearchViewController */,
 				5725090D29AE8094003A5933 /* PopularViewController */,
 				372C26ED29AB4FDE009AFF7B /* MainViewController.swift */,
 				3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */,
-				372C26FF29AB850A009AFF7B /* FavoriteViewController.swift */,
+				A5A5827129BDA72E00C4A198 /* FavouriteViewController */,
+				A580E6A829BD18BA00A40F70 /* SearchViewController */,
 				A57D6B3429B2029700D67DC6 /* RecipeDetailViewcontroller */,
 			);
 			path = Controllers;
@@ -315,9 +318,17 @@
 			children = (
 				A580E6AA29BD195100A40F70 /* CustomSerchBar.swift */,
 				A580E6AC29BD196100A40F70 /* SearchController.swift */,
-				A5A5826829BD1CDE00C4A198 /* RecipeTableViewCell.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		A5A5827129BDA72E00C4A198 /* FavouriteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				372C26FF29AB850A009AFF7B /* FavoriteViewController.swift */,
+				A5A5827229BDA79A00C4A198 /* FavouritesTableViewCell.swift */,
+			);
+			path = FavouriteViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +477,7 @@
 				A580E6AF29BD198C00A40F70 /* SearchTableViewCell.swift in Sources */,
 				A57D6B3029B1FBC100D67DC6 /* CustomViewController.swift in Sources */,
 				A57D6B3829B2035A00D67DC6 /* NutritionCustomView.swift in Sources */,
+				A5A5827329BDA79A00C4A198 /* FavouritesTableViewCell.swift in Sources */,
 				A5A5826929BD1CDE00C4A198 /* RecipeTableViewCell.swift in Sources */,
 				5725092029AE8D7F003A5933 /* TrendingCollectionViewCell.swift in Sources */,
 				372C26EA29AB4FDE009AFF7B /* AppDelegate.swift in Sources */,

@@ -23,8 +23,9 @@ class FavoriteViewController: UIViewController {
     //ImageArray
     var imageArray = "AppIcon" //переделается в массив UIImage
     
-    var networkManager = NetworkManager()
-    var recipe: RecipeModel?
+    let networkManager = NetworkManager()
+    let favoriteManager = FavoriteManager()
+    var recipes: [Recipe] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         createTable()
@@ -41,7 +42,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func createTable() {
         view.addSubview(tableView)
         tableView = UITableView(frame: view.bounds, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifireMenu)
+        tableView.register(FavouritesTableViewCell.self, forCellReuseIdentifier: FavouritesTableViewCell.reuseId)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -50,51 +51,40 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
     //установка количество строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        menuArray.count
+        recipes.count
     }
     
     //установка текста и изображения в TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: indentifireMenu, for: indexPath)
-        let menuText = menuArray[indexPath.row]
-        let imageView = imageArray
-        let ingredients = ingredientsArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavouritesTableViewCell.reuseId, for: indexPath)
+        guard let newCell = cell as? FavouritesTableViewCell else {
+            showErrorAlert(error: SearchError.errorConfigureCell)
+            return cell
+        }
+        let recipe = recipes[indexPath.row]
+        newCell.configureCell(for: recipe, with: nil)
+        guard let image = recipe.image else { return newCell }
         
-        var content = cell.defaultContentConfiguration()
-        content.text = menuText //устанавливаем навзвание блюда
-        content.secondaryText = ingredients // устанавливаем ингридиенты
-        content.image = UIImage(named: imageView) //устанавливаем изображение
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
+        networkManager.fetchImage(for: .recipe, with: image.changeImageSize(to: .small), size: ImageSizes.small.rawValue) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .success(let data):
+                    newCell.configureCell(for: recipe, with: UIImage(data: data))
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
+                }
+            }
+        }
         
-        cell.contentConfiguration = content
         
-        return cell
+        return newCell
     }
     
 //    Захват выбранной строки
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let numberMenu = indexPath.row
-        print(numberMenu)
+      
         
-        networkManager.fetchRecipes(ApiURL.randomSearch(number: 1, tags: ["Dinner"])) { [weak self] result in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                switch result {
-                case .success(let recipe):
-                    self.recipe = recipe
-                    if let recipe = recipe.recipes?.first {
-                        self.present(RecipeDetailViewController(with: recipe, index: indexPath), animated: true)
-                    }
-                case .failure(let error):
-                    let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "OK", style: .default) { alertAction in
-                        return
-                    }
-                    alert.addAction(cancelAction)
-                    self.present(alert, animated: true)
-                }
-            }
-        }
     }
     
     //удаление строк
@@ -128,5 +118,33 @@ extension FavoriteViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
         ])
+    }
+    
+    func fetchFavouriteRecipes() {
+        favoriteManager.getAllRecipeFromFavorite { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let recipesData):
+                if let recipesData = recipesData {
+                    self.recipes = recipesData.recipes!
+                }
+            case .failure(let error):
+                self.showErrorAlert(error: error)
+            }
+        }
+    }
+    
+}
+
+extension FavoriteViewController {
+    func showErrorAlert(error: Error) {
+        
+        let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .default) { alertAction in
+            return
+        }
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+        
     }
 }

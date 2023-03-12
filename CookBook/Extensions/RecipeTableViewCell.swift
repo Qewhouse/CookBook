@@ -95,7 +95,6 @@ class RecipesTableViewCell: UITableViewCell {
     }
     
     func configureCell(for recipe: Recipe?, with image: UIImage?) {
-        // Setting up spinner if image didn't load yet
         if let image = image {
             spinner.removeFromSuperview()
             mainImageView.alpha = 0.5
@@ -126,7 +125,7 @@ class RecipesTableViewCell: UITableViewCell {
         }
         
         infoLabel.text = "\(prepTime)m" + dishTypes
-        authorLabel.text = "by: " + (recipe.sourceName ?? "Uknown chef")
+        authorLabel.text = "by: " + (recipe.sourceName ?? "?")
     }
 }
 

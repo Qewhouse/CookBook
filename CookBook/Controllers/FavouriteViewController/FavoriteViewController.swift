@@ -8,6 +8,7 @@
 import UIKit
 
 class FavoriteViewController: UIViewController {
+    
     // TableView
     var tableView = UITableView()
     
@@ -34,11 +35,37 @@ class FavoriteViewController: UIViewController {
         setupConstraints()
         view.addSubview(tableView)
         
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        
+        dismissAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFavouriteRecipes()
+//        setBackground()
+    }
+    
+//    func setBackground() {
+//        if tableView.visibleCells.isEmpty {
+//            tableView.backgroundColor = Theme.redColor
+//                } else {
+//                    tableView.backgroundColor = Theme.yellowColor
+//                }
+//    }
+    
+    internal func dismissAlert() {
+        if let vc = self.presentedViewController, vc is UIAlertController {
+            dismiss(animated: false, completion: nil)
+        }
     }
     
 

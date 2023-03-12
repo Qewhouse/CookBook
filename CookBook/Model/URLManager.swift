@@ -16,11 +16,20 @@ struct ApiURL {
 
 extension ApiURL {
     
-    static func searchByID(recipeID: Int) -> ApiURL {
-        
+    static func searchByID(recipeID: [Int]) -> ApiURL {
+        var idString: String = ""
+        var i = 0
+        for id in recipeID {
+            if i == 0 {
+                idString = String(id)
+            } else {
+                idString = String("\(idString),\(id)")
+            }
+            i = i+1
+        }
         let url = ApiURL(path: SearchPath.findByID.rawValue, urlQueryItems: [
             URLQueryItem(name: "apiKey", value: Secrets.apiKey.rawValue),
-            URLQueryItem(name: "ids", value: String(recipeID)),
+            URLQueryItem(name: "ids", value: idString),
         ])
         return url
         

@@ -89,7 +89,13 @@ class TrendingCollectionViewCell: UICollectionViewCell {
             spinner.makeSpinner(trendingImageView)
         }
         trendingLabel.text = recipeName
-        readyInMinutesLabel.text = "Time: \(readyInMinutes) minute"
+        
+        // Форматирование времени приготовления
+        let hours = readyInMinutes / 60
+        let minutes = readyInMinutes % 60
+        let formattedTime = hours > 0 ? "\(hours) h \(minutes) min" : "\(minutes) min"
+        readyInMinutesLabel.text = "Time: \(formattedTime)"
+        
         if favoriteManager.checkForFavorite(recipeID: recipeID) {
             favoriteButton.setActive()
         } else {

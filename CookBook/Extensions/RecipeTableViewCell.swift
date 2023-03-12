@@ -117,14 +117,20 @@ class RecipesTableViewCell: UITableViewCell {
         
         recipeNameLabel.text = recipe.title
         
+        // Форматирование времени приготовления
         let prepTime = recipe.readyInMinutes
-        var dishTypes = ""
+        let hours = prepTime / 60
+        let minutes = prepTime % 60
         
+        let timeString = hours > 0 ? "\(hours) h " : ""
+        infoLabel.text = "Time: \(timeString)\(minutes) min"
+        
+        var dishTypes = ""
         for dishType in recipe.dishTypes {
             dishTypes += " · " + dishType
         }
+        infoLabel.text! += dishTypes
         
-        infoLabel.text = "\(prepTime)m" + dishTypes
         authorLabel.text = "by: " + (recipe.sourceName ?? "?")
     }
 }

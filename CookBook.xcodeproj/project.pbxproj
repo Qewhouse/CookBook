@@ -224,6 +224,7 @@
 			children = (
 				5725090D29AE8094003A5933 /* PopularViewController */,
 				372C26ED29AB4FDE009AFF7B /* MainViewController.swift */,
+				A580E6A929BD192600A40F70 /* Classes */,
 				3795D6DD29AD441F0075AE1B /* OnboardingViewController.swift */,
 				A5A5827129BDA72E00C4A198 /* FavouriteViewController */,
 				A580E6A829BD18BA00A40F70 /* SearchViewController */,
@@ -312,7 +313,6 @@
 		A580E6A829BD18BA00A40F70 /* SearchViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A580E6A929BD192600A40F70 /* Classes */,
 				372C270129AB8533009AFF7B /* SearchViewController.swift */,
 				A580E6AE29BD198C00A40F70 /* SearchTableViewCell.swift */,
 				A580E6B029BD199C00A40F70 /* SearchTableView.swift */,

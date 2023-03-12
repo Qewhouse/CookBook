@@ -8,27 +8,16 @@
 import UIKit
 
 class FavoriteViewController: UIViewController {
-    // TableView
+
+    
     var tableView = UITableView()
-    
-    // Indentifire
-    var indentifireMenu = "Cell"
-    
-    // MenuArray
-    var menuArray = ["Cookie","Cake","Pasta","Meat","Soup","Fish","Vegetables","Desert"] // массив для блюд (должен приходить из API)
-    
-    //ingredients
-    var ingredientsArray = ["1","2","3","4","5","6","7","8"]
-    
-    //ImageArray
-    var imageArray = "AppIcon" //переделается в массив UIImage
-    
     let networkManager = NetworkManager()
     let favoriteManager = FavoriteManager()
     var recipes: [Recipe] = []
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFavouriteRecipes()
         createTable()
         setupNavigationDar()
         setupConstraints()
@@ -38,6 +27,7 @@ class FavoriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        recipes = []
         fetchFavouriteRecipes()
     }
     
@@ -55,7 +45,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tableView.rowHeight = 100
+        tableView.rowHeight = 130
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     //установка количество строк

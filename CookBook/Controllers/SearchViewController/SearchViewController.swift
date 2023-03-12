@@ -125,7 +125,6 @@ extension SearchViewController {
         } else if recipe?.title != nil {
             newCell.configureCell(for: recipe, with: UIImage(systemName: "carrot.fill"))
         }
-        
         return newCell
     }
 }

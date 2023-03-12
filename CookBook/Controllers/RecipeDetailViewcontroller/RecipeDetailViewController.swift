@@ -189,11 +189,22 @@ private extension RecipeDetailViewController {
         customView.backgroundColor = .systemBackground
         customView.titleLabel.text = recipeData.title
         customView.sourceLabel.text = "by: \(recipeData.sourceName ?? "uknown")"
-        customView.prepTimeLabel.text = "\(recipeData.readyInMinutes) Min"
+        
+        // Форматирование времени приготовления
+        let hours = recipeData.readyInMinutes / 60
+        let minutes = recipeData.readyInMinutes % 60
+        let timeString: String
+        if hours > 0 {
+            timeString = "\(hours) h \(minutes) min"
+        } else {
+            timeString = "\(minutes) min"
+        }
+        customView.prepTimeLabel.text = "Time: \(timeString)"
         
         populateTags(with: recipeData)
         populateIngredientInfo(with: recipeData.extendedIngredients)
         populatePreparationInfo(with: recipeData.analyzedInstructions)
+        
         if favoriteManager.checkForFavorite(recipeID: recipeData.id) {
             customView.favoriteButton.setActive()
         }

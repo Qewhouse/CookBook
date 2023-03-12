@@ -77,7 +77,6 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        
         return newCell
     }
     
@@ -133,7 +132,6 @@ extension FavoriteViewController {
             }
         }
     }
-    
 }
 
 extension FavoriteViewController {

@@ -66,7 +66,6 @@ class SearchViewController: UITableViewController {
     }
 }
 
-
 // MARK: - UITableViewDelegate
 extension SearchViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -204,7 +203,6 @@ private extension SearchViewController {
             }
         }
     }
-    
 }
 
 extension SearchViewController {
@@ -219,6 +217,3 @@ extension SearchViewController {
         
     }
 }
-
-
-

@@ -12,7 +12,7 @@ protocol FavoriteManagerProtocol: AnyObject {
     func addToFavorite(recipeID: Int, recipeImage: Data?, completionBlock: @escaping (Result<Bool, Error>) -> Void)
     func deleteFromFavorite(recipeID: Int , completionBlock: @escaping (Result<Bool, Error>) -> Void)
     func getFromFavorite(recipeID: Int, completionBlock: @escaping (Result<RecipeModel, Error>) -> Void)
-    func getAllRecipeFromFavorite(completionBlock: @escaping (Result<[RecipeModel], Error>) -> Void)
+    func getAllRecipeFromFavorite(completionBlock: @escaping (Result<[Recipe], Error>) -> Void)
     func checkForFavorite(recipeID: Int) -> Bool
 }
 
@@ -32,52 +32,58 @@ class FavoriteManager: FavoriteManagerProtocol {
         if checkForFavorite(recipeID: recipeID) == true {
             completionBlock(.failure(FavoriteError.favoriteExist))
         } else {
-            networkManager.fetchRecipeByID(.searchByID(recipeID: recipeID)) { result in
-                switch result {
-                case .success(let data):
-                    recipeData = data
-                case .failure(let error):
-                    completionBlock(.failure(error))
-                }
-            }
+            
+            var favoriteIDList = self.defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+            favoriteIDList.append(recipeID)
+            self.defaults.set(favoriteIDList, forKey: "favoriteList")
+            completionBlock(.success(true))
+            //            networkManager.fetchRecipeByID(.searchByID(recipeID: recipeID)) { result in
+            //                switch result {
+            //                case .success(let data):
+            //                    recipeData = data
+            //                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            //                    let realm = try! Realm(configuration: config)
+            //
+            //                    // путь в проекте к файлу БД Realm (нужна RealmStudio):
+            //                    print (realm.configuration.fileURL ?? "")
+            //
+            //                    // Создаем экземпляр класса RealmRecipeModel
+            //                    let recipeRealm = RealmRecipeModel()
+            //
+            //                    //Присваиваем значения в объекты Realm
+            //                    recipeRealm.id = recipeID
+            //                    recipeRealm.data = data
+            //
+            //                    if let recipeImage = recipeImage {
+            //                        recipeRealm.image = recipeImage
+            //                    }
+            //
+            //                    do {
+            //                        //добавление в БД и проверка на обновленные данные
+            //                        try realm.write {
+            //                            realm.add(recipeRealm, update: .modified)
+            //                        }
+            //                        var favoriteIDList = self.defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+            //                        favoriteIDList.append(recipeID)
+            //                        self.defaults.set(favoriteIDList, forKey: "favoriteList")
+            //                        completionBlock(.success(true))
+            //                    } catch {
+            //                        completionBlock(.failure(error))
+            //                    }
+            //                case .failure(let error):
+            //                    completionBlock(.failure(error))
+            //                }
+            //            }
         }
         
-        guard let data = recipeData else {
-            completionBlock(.failure(FavoriteError.wrongCode))
-            return
-        }
+        //        guard let data = recipeData else {
+        //            completionBlock(.failure(FavoriteError.wrongCode))
+        //            return
+        //        }
         // Здесь мы записываем данные (recipeData а так же recipeImage ) в базу, а так же и в UserDefaults и возвращаем результат сохранения в completionBlock
         
         // Создаем конфигурацию экземпляра Realm для перезаписи БД, чтобы данные не дублировались
-        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-        let realm = try! Realm(configuration: config)
         
-        // путь в проекте к файлу БД Realm (нужна RealmStudio):
-        print (realm.configuration.fileURL ?? "")
-        
-        // Создаем экземпляр класса RealmRecipeModel
-        let recipeRealm = RealmRecipeModel()
-        
-        //Присваиваем значения в объекты Realm
-        recipeRealm.id = recipeID
-        recipeRealm.data = data
-        
-        if let recipeImage = recipeImage {
-            recipeRealm.image = recipeImage
-        }
-        
-        do {
-            //добавление в БД и проверка на обновленные данные
-            try realm.write {
-                realm.add(recipeRealm, update: .modified)
-            }
-            var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
-            favoriteIDList.append(recipeID)
-            defaults.set(favoriteIDList, forKey: "favoriteList")
-            completionBlock(.success(true))
-        } catch {
-            completionBlock(.failure(error))
-        }
     }
     
     //MARK: - Deleting from favorite method
@@ -88,30 +94,36 @@ class FavoriteManager: FavoriteManagerProtocol {
             completionBlock(.failure(FavoriteError.notInFavorite))
             return
         }
-        
-        //создание экземпляра класса Realm
-        let realm = try! Realm()
-        
-        //обращение к объектам в базе по id
-        guard let recipeRealm = realm.object(ofType: RealmRecipeModel.self, forPrimaryKey: recipeID) else {
-            completionBlock(.failure(FavoriteError.notInFavorite))
-            return
+        var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+        if let index = favoriteIDList.firstIndex(of: recipeID) {
+            favoriteIDList.remove(at: index)
+            defaults.set(favoriteIDList, forKey: "favoriteList")
         }
+        completionBlock(.success(true))
         
-        do {
-            //удаление из БД
-            try realm.write {
-                realm.delete(recipeRealm)
-            }
-            var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
-            if let index = favoriteIDList.firstIndex(of: recipeID) {
-                favoriteIDList.remove(at: index)
-                defaults.set(favoriteIDList, forKey: "favoriteList")
-            }
-            completionBlock(.success(true))
-        } catch let error {
-            completionBlock(.failure(error))
-        }
+        //        //создание экземпляра класса Realm
+        //        let realm = try! Realm()
+        //
+        //        //обращение к объектам в базе по id
+        //        guard let recipeRealm = realm.object(ofType: RealmRecipeModel.self, forPrimaryKey: recipeID) else {
+        //            completionBlock(.failure(FavoriteError.notInFavorite))
+        //            return
+        //        }
+        //
+        //        do {
+        //            //удаление из БД
+        //            try realm.write {
+        //                realm.delete(recipeRealm)
+        //            }
+        //            var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+        //            if let index = favoriteIDList.firstIndex(of: recipeID) {
+        //                favoriteIDList.remove(at: index)
+        //                defaults.set(favoriteIDList, forKey: "favoriteList")
+        //            }
+        //            completionBlock(.success(true))
+        //        } catch let error {
+        //            completionBlock(.failure(error))
+        //        }
     }
     
     //MARK: - Getting from favorite method
@@ -148,30 +160,43 @@ class FavoriteManager: FavoriteManagerProtocol {
     
     //MARK: - Getting all recipe from favorite
     
-    func getAllRecipeFromFavorite(completionBlock: @escaping (Result<[RecipeModel], Error>) -> Void) {
+    func getAllRecipeFromFavorite(completionBlock: @escaping (Result<[Recipe], Error>) -> Void) {
         
         // создание экземпляра базы данных Realm
-        let realm = try! Realm()
-        
-        // получаем все объекты типа RealmRecipeModel из базы данных
-        let recipesRealm = realm.objects(RealmRecipeModel.self)
+//        let realm = try! Realm()
+//
+//        // получаем все объекты типа RealmRecipeModel из базы данных
+//        let recipesRealm = realm.objects(RealmRecipeModel.self)
         
         // создаем массив для хранения рецептов
-        var recipes = [RecipeModel]()
+        //var recipes: Recipe?
         
-        for recipeRealm in recipesRealm {
-            // преобразовываем каждый объект RealmRecipeModel в объект RecipeModel
-            let recipeData = recipeRealm.data
-            if let recipe = try? JSONDecoder().decode(RecipeModel.self, from: recipeData) {
-                recipes.append(recipe)
+        var favoriteIDList = defaults.object(forKey: "favoriteList") as? [Int] ?? [Int]()
+        networkManager.fetchRecipeByID(.searchByID(recipeID: favoriteIDList)) { result in
+            switch result {
+                
+            case .success(let data):
+                completionBlock(.success(data))
+            case .failure(let error):
+                completionBlock(.failure(error))
             }
         }
         
-        if recipes.isEmpty {
-            completionBlock(.failure(FavoriteError.notInFavorite))
-        } else {
-            completionBlock(.success(recipes))
-        }
+        
+//        for recipeRealm in recipesRealm {
+//            // преобразовываем каждый объект RealmRecipeModel в объект RecipeModel
+//            let recipeData = recipeRealm.data
+//            if let recipe = try? JSONDecoder().decode(RecipeModel.self, from: recipeData) {
+//                recipes = recipe
+//            }
+//        }
+//
+//        if recipes != nil {
+//            completionBlock(.failure(FavoriteError.notInFavorite))
+//        } else {
+//            guard let recipes = recipes else { return }
+//            completionBlock(.success(recipes))
+//        }
     }
     
     //MARK: - Checking is favorite exist

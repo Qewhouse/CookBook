@@ -8,6 +8,7 @@
 import UIKit
 
 class FavoriteViewController: UIViewController {
+    
     // TableView
     var tableView = UITableView()
     
@@ -16,7 +17,7 @@ class FavoriteViewController: UIViewController {
     
     // MenuArray
     var menuArray = ["Cookie","Cake","Pasta","Meat","Soup","Fish","Vegetables","Desert"] // массив для блюд (должен приходить из API)
-
+    
     //ingredients
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
     
@@ -28,11 +29,43 @@ class FavoriteViewController: UIViewController {
     var recipes: [Recipe] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchFavouriteRecipes()
         createTable()
         setupNavigationDar()
         setupConstraints()
         view.addSubview(tableView)
+        
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        
+        dismissAlert()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchFavouriteRecipes()
+//        setBackground()
+    }
+    
+//    func setBackground() {
+//        if tableView.visibleCells.isEmpty {
+//            tableView.backgroundColor = Theme.redColor
+//                } else {
+//                    tableView.backgroundColor = Theme.yellowColor
+//                }
+//    }
+    
+    internal func dismissAlert() {
+        if let vc = self.presentedViewController, vc is UIAlertController {
+            dismiss(animated: false, completion: nil)
+        }
     }
 }
 //MARK: - TableView
@@ -80,23 +113,37 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         return newCell
     }
     
-//    Захват выбранной строки
+    //    Захват выбранной строки
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        
+        var detailViewController: RecipeDetailViewController!
+        detailViewController = RecipeDetailViewController(with: recipes[indexPath.row], index: indexPath)
+        present(detailViewController, animated: true)
     }
     
     //удаление строк
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let actionDeleteItem = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, result) in
+            
+            self.favoriteManager.deleteFromFavorite(recipeID: self.recipes[indexPath.row].id) { results in
+                switch results {
+                    
+                case .success(_):
+                    self.recipes.remove(at: indexPath.row)
+                    tableView.reloadData()
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
+                }
+                result(true)
+            }
+        }
+        actionDeleteItem.backgroundColor = .red
+        let swipeAction = UISwipeActionsConfiguration(actions: [actionDeleteItem])
+        swipeAction.performsFirstActionWithFullSwipe = false
+        return swipeAction
+        
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            menuArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-        }
-    }
+
 }
 //MARK: - настройка NavigationBar
 
@@ -121,14 +168,15 @@ extension FavoriteViewController {
     
     func fetchFavouriteRecipes() {
         favoriteManager.getAllRecipeFromFavorite { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let recipesData):
-                if let recipesData = recipesData {
-                    self.recipes = recipesData.recipes!
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .success(let recipesData):
+                    self.recipes = recipesData
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
                 }
-            case .failure(let error):
-                self.showErrorAlert(error: error)
             }
         }
     }

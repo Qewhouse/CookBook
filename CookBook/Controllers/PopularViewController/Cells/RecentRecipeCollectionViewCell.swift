@@ -98,6 +98,12 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         readyInMinutesLabel.text = "Time: \(formattedTime)"
         
         self.recipeID = recipeID
+        if favoriteManager.checkForFavorite(recipeID: recipeID) {
+            favoriteButton.setActive()
+        } else {
+            favoriteButton.setInactive()
+        }
+        self.recipeID = recipeID
     }
     
     func setConstraints() {

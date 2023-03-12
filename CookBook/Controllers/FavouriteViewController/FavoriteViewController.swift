@@ -67,6 +67,9 @@ class FavoriteViewController: UIViewController {
             dismiss(animated: false, completion: nil)
         }
     }
+    
+
+    
 }
 //MARK: - TableView
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {

@@ -16,7 +16,7 @@ class FavoriteViewController: UIViewController {
     
     // MenuArray
     var menuArray = ["Cookie","Cake","Pasta","Meat","Soup","Fish","Vegetables","Desert"] // массив для блюд (должен приходить из API)
-
+    
     //ingredients
     var ingredientsArray = ["1","2","3","4","5","6","7","8"]
     
@@ -28,12 +28,21 @@ class FavoriteViewController: UIViewController {
     var recipes: [Recipe] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchFavouriteRecipes()
         createTable()
         setupNavigationDar()
         setupConstraints()
         view.addSubview(tableView)
-
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchFavouriteRecipes()
+    }
+    
+
+    
 }
 //MARK: - TableView
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -80,23 +89,37 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         return newCell
     }
     
-//    Захват выбранной строки
+    //    Захват выбранной строки
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        
+        var detailViewController: RecipeDetailViewController!
+        detailViewController = RecipeDetailViewController(with: recipes[indexPath.row], index: indexPath)
+        present(detailViewController, animated: true)
     }
     
     //удаление строк
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let actionDeleteItem = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, result) in
+            
+            self.favoriteManager.deleteFromFavorite(recipeID: self.recipes[indexPath.row].id) { results in
+                switch results {
+                    
+                case .success(_):
+                    self.recipes.remove(at: indexPath.row)
+                    tableView.reloadData()
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
+                }
+                result(true)
+            }
+        }
+        actionDeleteItem.backgroundColor = .red
+        let swipeAction = UISwipeActionsConfiguration(actions: [actionDeleteItem])
+        swipeAction.performsFirstActionWithFullSwipe = false
+        return swipeAction
+        
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            menuArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-        }
-    }
+
 }
 //MARK: - настройка NavigationBar
 
@@ -121,14 +144,15 @@ extension FavoriteViewController {
     
     func fetchFavouriteRecipes() {
         favoriteManager.getAllRecipeFromFavorite { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let recipesData):
-                if let recipesData = recipesData {
-                    self.recipes = recipesData.recipes!
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .success(let recipesData):
+                    self.recipes = recipesData
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    self.showErrorAlert(error: error)
                 }
-            case .failure(let error):
-                self.showErrorAlert(error: error)
             }
         }
     }

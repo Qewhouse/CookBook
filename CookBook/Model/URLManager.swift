@@ -13,32 +13,6 @@ struct ApiURL {
     var urlQueryItems: [URLQueryItem]
 }
 
-struct FilterParam {
-    var cuisine: String?
-    var diet: String?
-    var type: String?
-    var intolerances: [String]
-    var maxCalories: Int?
-    var sort: String?
-    
-    init(cuisine: String?, diet: String?, type: String?, intolerances: [String], maxCalories: Int?, sort: String?) {
-        self.cuisine = cuisine
-        self.diet = diet
-        self.type = type
-        self.intolerances = intolerances
-        self.maxCalories = maxCalories
-        self.sort = sort
-    }
-    
-    init() {
-        cuisine = nil
-        diet = nil
-        type = nil
-        intolerances = []
-        maxCalories = nil
-        sort = nil
-    }
-}
 
 extension ApiURL {
     
@@ -70,7 +44,7 @@ extension ApiURL {
         return url
     }
     
-    static func searchWithFilter(_ filter: FilterParam, query: String?, number: Int) -> ApiURL {
+    static func searchWithFilter(_ filter: FilterProperty, query: String?, number: Int) -> ApiURL {
         
         let intolerances = arrayToString(array: filter.intolerances)
         let maxCalories: String = filter.maxCalories == nil ? "10000" : String(filter.maxCalories!)

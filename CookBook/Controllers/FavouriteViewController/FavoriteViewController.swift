@@ -26,7 +26,7 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(backGround)
         setBackground()
-  //      fetchFavouriteRecipes()
+        fetchFavouriteRecipes()
         createTable()
         setupNavigationDar()
         setupConstraints()

@@ -1,7 +1,9 @@
 # CookBook
-![GitHub repo size](https://img.shields.io/github/repo-size/qewhouse/CookBook)  ![GitHub contributors](https://img.shields.io/github/contributors/qewhouse/CookBook)   ![GitHub last commit](https://img.shields.io/github/last-commit/qewhouse/CookBook)
+![GitHub repo size](https://img.shields.io/github/repo-size/qewhouse/CookBook)  ![GitHub contributors](https://img.shields.io/github/contributors/qewhouse/CookBook)   ![GitHub last commit](https://img.shields.io/github/last-commit/qewhouse/CookBook) ![][ios] ![][swift] ![][uikit] 
 
-The application was created as part of the 6th stream of the Swift Marathon project. (https://t.me/swiftmarathon).
+
+
+### The application was created as part of the 6th stream of the Swift Marathon project (https://t.me/swiftmarathon).
 ![Logo](https://user-images.githubusercontent.com/31271156/224539720-12684b84-3f8a-4f1b-9a3c-2596cc60aad2.png)
 ## Mobile app for finding new recipes and getting inspiration in the kitchen. And even more...
 
@@ -30,3 +32,8 @@ The application was created as part of the 6th stream of the Swift Marathon proj
 - https://github.com/MichaelPNZ
 - https://github.com/nikolay1414
 - https://github.com/memsec
+
+
+[ios]: https://img.shields.io/badge/iOS-13.0-critical
+[swift]: https://img.shields.io/badge/-Swift-9cf
+[uikit]: https://img.shields.io/badge/-UIKit-blue
